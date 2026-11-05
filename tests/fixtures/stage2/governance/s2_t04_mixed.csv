@@ -1,0 +1,6 @@
+source_record_id,source_station_id,interval_start_utc,interval_end_utc,energy,energy_unit,amount,amount_unit,observation_kind,source_timezone,session_started,pile_id,capacity_piles
+m-001,station-a,2026-09-02T08:00:00Z,2026-09-02T09:00:00Z,5.00,kwh,10.00,yuan,METER_INTERVAL,UTC,1,pile-a1,10
+m-002,station-a,2026-09-02T09:00:00Z,2026-09-02T10:00:00Z,5.50,kwh,11.00,yuan,METER_INTERVAL,UTC,1,pile-a2,10
+m-003,station-b,2026-09-02T08:00:00Z,2026-09-02T09:00:00Z,3.20,kwh,6.40,yuan,METER_INTERVAL,UTC,1,pile-b1,8
+m-003,station-b,2026-09-02T08:00:00Z,2026-09-02T09:00:00Z,3.20,kwh,6.40,yuan,METER_INTERVAL,UTC,1,pile-b1,8
+m-004,station-a,2026-09-02T25:00:00Z,2026-09-02T26:00:00Z,4.00,kwh,8.00,yuan,METER_INTERVAL,UTC,1,pile-a1,10

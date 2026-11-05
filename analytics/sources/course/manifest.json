@@ -1,0 +1,42 @@
+{
+  "dataset_name": "course-charging-sessions-2014-2015",
+  "provider": "课程/教授提供的教学数据集（提供方原文见 source_url，链接待补）",
+  "source_url": "课程资料：part-00000-870d656c-e3b3-4ebe-b5d7-635f55d71975-c000.csv（许可原文链接待补齐）",
+  "allowed_uses": ["teaching-analysis"],
+  "prohibited_uses": ["redistribution", "production-decision", "profiling"],
+  "acquired_at": "2026-09-14T00:00:00Z",
+  "data_mode": "REAL_ANONYMIZED",
+  "dataset_version": "course-v1",
+  "coverage_start": "2014-11-18T00:00:00Z",
+  "coverage_end": "2015-10-04T00:00:00Z",
+  "redistribution_allowed": false,
+  "retention_policy": "course-only, delete after term; raw file kept in local controlled zone only",
+  "privacy_boundary": "userId/managerVehicle 等个人标识列在本地受控区裁剪后才进入 raw；共享区与仓库只保留聚合与统计；许可原文链接待补，补齐前原始 raw 不进入共享区",
+  "ingest_batch": "course-batch-001",
+  "source_id": "course",
+  "contract": "historical_interval_v1",
+  "sampling_frequency": "per charging session (session-level)",
+  "fields": [
+    "source_record_id", "source_station_id", "interval_start_utc", "interval_end_utc",
+    "energy", "energy_unit", "observation_kind", "source_timezone", "session_started"
+  ],
+  "assumptions": {
+    "year_offset": 2000,
+    "year_basis": "created/ended 年份被脱敏减 2000（0014/0015）；weekday 字段与真实日历一致（0014-11-18=Tue，真实 2014-11-18 亦为周二）",
+    "source_timezone": "Asia/Shanghai",
+    "timezone_basis": "原文件无时区列，按国内数据推定；仅用于展示换算，存储一律 UTC",
+    "energy_unit": "kwh",
+    "energy_unit_basis": "原文件无单位列，按列名 kwhTotal 推定",
+    "observation_kind": "SESSION_ALLOCATED",
+    "observation_kind_basis": "会话级起止 + 会话总电量，不是电表逐点读数；小时值为按重叠秒数的分摊估计，图表与评估必须注明"
+  },
+  "station_selection": {
+    "rule": "distinct_days>=28 and records>=50; keep all qualifying stations",
+    "note": "来源共 105 站，仅 19 站满足规则；未入选站点不参与发布（范围外，非数据缺陷），其行数单独记入 excluded。"
+  },
+  "known_gaps": [
+    "许可原文链接待补（提供方书面说明/课程平台链接）",
+    "amount_yuan 一律 null + NOT_COLLECTED：totalFees 为二进制浮点长尾且无单位列，不发布金额",
+    "无容量/桩数/停用列，occupied_piles/capacity_piles 只能为 null + NOT_COLLECTED，空闲桩预测 S2-08 为 BLOCKED"
+  ]
+}

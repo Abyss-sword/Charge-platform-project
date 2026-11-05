@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "charge_event_v1.schema.json",
+  "title": "charge_event_v1",
+  "description": "Read-only, de-identified charge event export contract. Energy, duration and amount use Wh, seconds and cents.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_record_id",
+    "source_station_id",
+    "station_id",
+    "occurred_at",
+    "ingested_at",
+    "timezone",
+    "energy_wh",
+    "duration_seconds",
+    "amount_cents",
+    "status",
+    "data_mode",
+    "dataset_name",
+    "dataset_version",
+    "ingest_batch"
+  ],
+  "properties": {
+    "source_record_id": { "type": "string", "minLength": 1 },
+    "source_station_id": { "type": "string", "minLength": 1 },
+    "station_id": { "type": "integer", "minimum": 1 },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "ingested_at": { "type": "string", "format": "date-time" },
+    "timezone": { "type": "string", "minLength": 1 },
+    "energy_wh": { "type": "integer", "minimum": 0 },
+    "duration_seconds": { "type": "integer", "minimum": 0 },
+    "amount_cents": { "type": "integer", "minimum": 0 },
+    "status": {
+      "type": "string",
+      "enum": ["RESERVED", "CHARGING", "PENDING_PAYMENT", "FINISHED", "CANCELED", "EXPIRED"]
+    },
+    "data_mode": {
+      "type": "string",
+      "enum": ["SIMULATED", "REAL_ANONYMIZED", "PUBLIC_AGGREGATED"]
+    },
+    "dataset_name": { "type": "string", "minLength": 1 },
+    "dataset_version": { "type": "string", "minLength": 1 },
+    "ingest_batch": { "type": "string", "minLength": 1 }
+  }
+}

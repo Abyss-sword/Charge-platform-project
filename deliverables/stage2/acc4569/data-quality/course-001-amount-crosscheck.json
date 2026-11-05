@@ -1,0 +1,10 @@
+{
+  "rows_with_amount": 3340,
+  "rows_not_numeric": 0,
+  "sum_raw_decimal": "20071.116006471961990240",
+  "sum_half_up_2dp": "20071.12",
+  "min": "0.008999999798834325",
+  "max": "31.739999771118164",
+  "unit": "UNVERIFIED",
+  "note": "totalFees 为二进制浮点长尾且无单位列；本文件仅供本地核对，不进入发布产物、仓库或共享区。"
+}

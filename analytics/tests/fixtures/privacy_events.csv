@@ -1,0 +1,2 @@
+source_record_id,source_station_id,event_time,timezone,energy,energy_unit,duration,duration_unit,amount,amount_unit,event_status,phone_number
+PUB-PII-1,PUB-STATION-A,2026-01-07T14:00:00+08:00,Asia/Shanghai,3.00,kwh,20,minutes,3.60,yuan,COMPLETED,13800000000

@@ -1,0 +1,48 @@
+build/
+build-*/
+b3req/
+.worktrees/
+runtime/
+analytics/.venv/
+analytics/__pycache__/
+analytics/artifacts/*.joblib
+analytics/models/
+*.egg-info/
+dashboard/node_modules/
+dashboard/dist/
+config/app.ini
+*.db
+*.db-shm
+*.db-wal
+*.log
+
+# CMake and Qt local build metadata
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+compile_commands.json
+*.user
+*.user.*
+
+# Python and Node local environments
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+dist/
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local secrets and environment configuration
+.env
+.env.*
+*.key
+*.pem
+
+# Additional local database formats
+*.sqlite
+*.sqlite3

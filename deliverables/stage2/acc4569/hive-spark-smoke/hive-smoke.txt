@@ -1,0 +1,49 @@
+# Hive 冒烟证据（acc4569）
+
+采集日期：2026-09-14。来源：VM `/tmp/s2-hive-smoke.log`（原始文件 783 字节，日志时间 20:41）。
+
+## 命令
+
+```text
+beeline -u jdbc:hive2://localhost:10000 -e "<三条聚合查询>"
+```
+
+外部表：`smoke_db.hourly_course_smoke`，指向 HDFS 路径 `/charge_platform/hourly/course-v1/course-001`。
+
+## 三条查询结果原文
+
+### Q1 行数（rows_cnt）
+
+```text
++-----------+
+| rows_cnt  |
++-----------+
+| 6700      |
++-----------+
+```
+
+### Q2 站点数（stations）
+
+```text
++-----------+
+| stations  |
++-----------+
+| 19        |
++-----------+
+```
+
+### Q3 总电量（total_kwh）
+
+```text
++---------------------+
+|      total_kwh      |
++---------------------+
+| 10349.589999999990  |
++---------------------+
+```
+
+## 结论
+
+Hive 3.1.3 经 beeline 走 HiveServer2（jdbc:hive2://localhost:10000）读取同一 `hourly` 路径，行数 6700、站点 19、总电量 10349.589999999990，与 Spark 冒烟结果一致（见 `spark-smoke.txt`）。
+
+缺失/异常标注：日志中未回显 beeline 命令原文（仅结果表格与 SLF4J 绑定告警），命令为任务说明所述；本文件按该说明记录，未二次执行。

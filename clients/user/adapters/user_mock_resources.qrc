@@ -1,0 +1,1 @@
+<RCC><qresource prefix="/mock/user"><file alias="login.json">mock/login.json</file><file alias="stations.json">mock/stations.json</file><file alias="order.json">mock/order.json</file></qresource></RCC>

@@ -1,0 +1,82 @@
+{
+  "description": "historical_interval_v1 规范化记录样例：由治理夹具经 history_adapter 转换后的期望形态，供 schema 校验与三端对照。",
+  "records": [
+    {
+      "source_id": "sim",
+      "dataset_version": "fixture-v1",
+      "record_id": "rec-001",
+      "analysis_station_id": "sim:station-a",
+      "interval_start_utc": "2026-09-01T09:00:00Z",
+      "interval_end_utc": "2026-09-01T10:00:00Z",
+      "energy_kwh": "7.30",
+      "observation_kind": "METER_INTERVAL",
+      "data_mode": "SIMULATED",
+      "source_timezone": "UTC",
+      "pile_id": "pile-a1",
+      "amount_yuan": "23.05",
+      "available_piles": null,
+      "capacity_piles": 10,
+      "occupied_piles": null,
+      "temperature_c": null,
+      "weather_source": null,
+      "null_reasons": {
+        "available_piles": "NOT_COLLECTED",
+        "occupied_piles": "NOT_COLLECTED",
+        "temperature_c": "NOT_COLLECTED",
+        "weather_source": "NOT_COLLECTED"
+      }
+    },
+    {
+      "source_id": "sim",
+      "dataset_version": "fixture-v1",
+      "record_id": "rec-002",
+      "analysis_station_id": "sim:station-a",
+      "interval_start_utc": "2026-09-01T10:30:00Z",
+      "interval_end_utc": "2026-09-01T11:30:00Z",
+      "energy_kwh": "6.15",
+      "observation_kind": "METER_INTERVAL",
+      "data_mode": "SIMULATED",
+      "source_timezone": "UTC",
+      "pile_id": "pile-a2",
+      "amount_yuan": null,
+      "available_piles": null,
+      "capacity_piles": 10,
+      "occupied_piles": null,
+      "temperature_c": null,
+      "weather_source": null,
+      "null_reasons": {
+        "amount_yuan": "NOT_COLLECTED",
+        "available_piles": "NOT_COLLECTED",
+        "occupied_piles": "NOT_COLLECTED",
+        "temperature_c": "NOT_COLLECTED",
+        "weather_source": "NOT_COLLECTED"
+      }
+    },
+    {
+      "source_id": "sim",
+      "dataset_version": "fixture-v1",
+      "record_id": "rec-003",
+      "analysis_station_id": "sim:station-b",
+      "interval_start_utc": "2026-09-01T09:00:00Z",
+      "interval_end_utc": "2026-09-01T10:00:00Z",
+      "energy_kwh": "4.80",
+      "observation_kind": "PUBLIC_HOURLY",
+      "data_mode": "SIMULATED",
+      "source_timezone": "UTC",
+      "pile_id": null,
+      "amount_yuan": "12.60",
+      "available_piles": null,
+      "capacity_piles": 8,
+      "occupied_piles": null,
+      "temperature_c": null,
+      "weather_source": null,
+      "null_reasons": {
+        "pile_id": "NOT_APPLICABLE",
+        "available_piles": "NOT_COLLECTED",
+        "occupied_piles": "NOT_COLLECTED",
+        "temperature_c": "NOT_COLLECTED",
+        "weather_source": "NOT_COLLECTED"
+      }
+    }
+  ]
+}

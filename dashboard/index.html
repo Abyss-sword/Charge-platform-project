@@ -1,0 +1,40 @@
+<!-- 声明 HTML5，浏览器按标准模式渲染运营大屏。 -->
+<!doctype html>
+<!-- 页面语言为简体中文，答辩投影和读屏都按中文处理。 -->
+<html lang="zh-CN">
+  <head> <!-- 文档头：编码、视口、浅色和标题。 -->
+    <!-- UTF-8 保证标题、按钮和注释里的中文不乱码。 -->
+    <meta charset="UTF-8" />
+    <!-- 按设备宽度缩放，笔记本和教室投影都能铺满。 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 默认白昼；脚本会按上次选择改成 dark，避免被系统主题带走。 -->
+    <meta name="color-scheme" content="light" />
+    <!-- 浏览器标签页标题，对应成员3运营大屏。 -->
+    <title>充电桩运营数据大屏</title>
+    <!-- 在 Vue 加载前恢复黑夜，避免先闪一帧白昼。 -->
+    <script>
+      try {
+        if (localStorage.getItem('dashboard-ui-theme') === 'night') {
+          document.documentElement.setAttribute('data-theme', 'night')
+          document.documentElement.style.colorScheme = 'dark'
+          document.querySelector('meta[name="color-scheme"]').setAttribute('content', 'dark')
+        }
+      } catch (error) { /* 隐私模式读不到存储时保持白昼。 */ }
+    </script>
+  </head> <!-- 结束文档头。 -->
+  <!-- 正文只留挂载点：Vue 根实例会替换 #app。 -->
+  <body>
+    <!-- Vue 3 根节点，由 src/main.ts 调用 mount('#app')。 -->
+    <div id="app"></div>
+    <!-- 以 ES 模块启动 Vite 入口；开发时 /api 由 vite.config.ts 代理到 FastAPI :8000。 -->
+    <script type="module" src="/src/main.ts"></script>
+  </body> <!-- 结束正文。 -->
+</html> <!-- 结束 HTML 文档。 -->
+<!--
+【文件讲解·答辩用】
+功能作用：这是大屏的唯一 HTML 壳。浏览器先打开它，再由 Vite 加载 main.ts，把 Vue 应用挂到 #app。
+技术原理：SPA 入口页本身不写业务数据。默认 color-scheme=light；若 localStorage 记过黑夜，内联脚本会先改 data-theme，避免先闪白昼。script type=module 让 Vite 做热更新和依赖打包。
+代码思路：head 只放编码、视口、浅色和标题；body 只有挂载点和入口脚本。不在这里写指标、图表或场景按钮，避免和 Vue 组件抢 DOM。
+与其他文件关系：被 Vite 开发服务器和构建产物直接使用；挂载后执行 src/main.ts，再渲染 App.vue。/api 代理规则在 vite.config.ts，不在本文件。
+答辩时可以怎么讲：先打开这个页面说明“浏览器只认这一张壳”；强调大屏数据不是写死在 HTML 里，而是后续组件去请求 /api/dashboard。顶部「实时/加载中」和场景切换都不在这里，分别在 App.vue 和 ScenarioSwitcher.vue。
+-->

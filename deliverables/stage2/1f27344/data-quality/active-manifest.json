@@ -1,0 +1,22 @@
+{
+  "active": {
+    "fixture-v1": {
+      "counts": {
+        "accepted": 3,
+        "hours": 4,
+        "rejected": 0
+      },
+      "dataMode": "SIMULATED",
+      "path": "/home/bit/projects/charge_platform_stage2/runtime/analytics/runs/fixture-v1/run-manifest-e2e",
+      "publishedAt": "2026-09-13T11:11:09Z",
+      "quality": {
+        "accepted": 3,
+        "rejected": 0,
+        "validRate": 1.0
+      },
+      "runId": "run-manifest-e2e",
+      "sourceId": "sim"
+    }
+  },
+  "updatedAt": "2026-09-13T11:11:09Z"
+}

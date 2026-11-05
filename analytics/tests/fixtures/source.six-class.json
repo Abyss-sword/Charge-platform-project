@@ -1,0 +1,18 @@
+{
+  "dataset_name": "member3-six-class-quality-fixtures",
+  "provider": "第29组成员3质量夹具",
+  "source_url": "local://analytics/tests/fixtures/six_class_events.csv",
+  "allowed_uses": ["teaching-analysis", "testing"],
+  "prohibited_uses": ["claiming-real-operations"],
+  "acquired_at": "2026-09-10T10:30:00+08:00",
+  "data_mode": "PUBLIC_AGGREGATED",
+  "dataset_version": "fixture-v1",
+  "coverage_start": "2026-01-07T10:00:00+08:00",
+  "coverage_end": "2026-01-07T13:00:00+08:00",
+  "redistribution_allowed": true,
+  "retention_policy": "仅测试使用",
+  "privacy_boundary": "本文件不含隐私列；隐私样例见 privacy_events.csv",
+  "ingest_batch": "fixture-six-class-001",
+  "min_valid_rate": 0.25,
+  "fields": ["source_record_id", "source_station_id", "event_time", "timezone", "energy", "energy_unit", "duration", "duration_unit", "amount", "amount_unit", "event_status"]
+}

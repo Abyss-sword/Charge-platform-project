@@ -1,0 +1,13 @@
+# CTest 结果（acc4569）
+
+来源：VM `/tmp/s2-ctest.log`（本轮已复制为 `ctest.log`）。命令：`ctest`（构建目录 `/home/bit/projects/stage2_acceptance/build`）。
+
+```text
+100% tests passed, 0 tests failed out of 37
+
+Total Test time (real) =  19.77 sec
+```
+
+结论：**37/37 通过，0 失败**。最后一条用例 `remote_admin_provider_test`（#37）Passed。
+
+备注：另一份并行日志 `/tmp/ctest-final.log` 亦为 `100% tests passed, 0 tests failed out of 37`（Total 19.39 sec），与本结果一致；早期 `/tmp/ctest2.log` / `/tmp/lk-ctest-baseline.log` 为 36 项旧基线，不采用。

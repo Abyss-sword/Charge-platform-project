@@ -1,0 +1,48 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.group29.charge:charge-hourly:jar:1.0.0
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-jar-plugin is missing. @ line 43, column 15
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< org.group29.charge:charge-hourly >------------------
+[INFO] Building charge-hourly 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ charge-hourly ---
+[INFO] skip non existing resourceDirectory /home/bit/projects/stage2_acceptance/bigdata/mapreduce/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ charge-hourly ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 4 source files with javac [debug target 1.8] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ charge-hourly ---
+[INFO] skip non existing resourceDirectory /home/bit/projects/stage2_acceptance/bigdata/mapreduce/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ charge-hourly ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug target 1.8] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ charge-hourly ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junit4.JUnit4Provider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running org.group29.charge.HourlyAggregationTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.035 s -- in org.group29.charge.HourlyAggregationTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.307 s
+[INFO] Finished at: 2026-09-14T19:31:46+08:00
+[INFO] ------------------------------------------------------------------------

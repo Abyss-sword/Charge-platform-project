@@ -1,0 +1,80 @@
+Internal ctest changing into directory: /home/bit/projects/stage2_acceptance/build
+Test project /home/bit/projects/stage2_acceptance/build
+      Start  1: smoke_test
+ 1/37 Test  #1: smoke_test .........................   Passed    0.01 sec
+      Start  2: frame_codec_test
+ 2/37 Test  #2: frame_codec_test ...................   Passed    0.00 sec
+      Start  3: schema_test
+ 3/37 Test  #3: schema_test ........................   Passed    0.15 sec
+      Start  4: analytics_export_contract_test
+ 4/37 Test  #4: analytics_export_contract_test .....   Passed    0.00 sec
+      Start  5: server_health_test
+ 5/37 Test  #5: server_health_test .................   Passed    0.06 sec
+      Start  6: user_service_test
+ 6/37 Test  #6: user_service_test ..................   Passed    0.15 sec
+      Start  7: geo_test
+ 7/37 Test  #7: geo_test ...........................   Passed    0.00 sec
+      Start  8: decimal_value_test
+ 8/37 Test  #8: decimal_value_test .................   Passed    0.00 sec
+      Start  9: station_service_test
+ 9/37 Test  #9: station_service_test ...............   Passed    0.06 sec
+      Start 10: order_state_test
+10/37 Test #10: order_state_test ...................   Passed    0.00 sec
+      Start 11: reservation_race_test
+11/37 Test #11: reservation_race_test ..............   Passed    0.49 sec
+      Start 12: payment_idempotency_test
+12/37 Test #12: payment_idempotency_test ...........   Passed    0.12 sec
+      Start 13: admin_service_test
+13/37 Test #13: admin_service_test .................   Passed    0.69 sec
+      Start 14: telemetry_service_test
+14/37 Test #14: telemetry_service_test .............   Passed    0.14 sec
+      Start 15: alarm_ticket_test
+15/37 Test #15: alarm_ticket_test ..................   Passed    0.05 sec
+      Start 16: telemetry_protocol_test
+16/37 Test #16: telemetry_protocol_test ............   Passed   11.24 sec
+      Start 17: client_query_protocol_test
+17/37 Test #17: client_query_protocol_test .........   Passed    0.03 sec
+      Start 18: user_authorization_protocol_test
+18/37 Test #18: user_authorization_protocol_test ...   Passed    0.45 sec
+      Start 19: admin_operations_protocol_test
+19/37 Test #19: admin_operations_protocol_test .....   Passed    0.33 sec
+      Start 20: linkage_contract_test
+20/37 Test #20: linkage_contract_test ..............   Passed    0.36 sec
+      Start 21: reset_demo_database_test
+21/37 Test #21: reset_demo_database_test ...........   Passed    0.18 sec
+      Start 22: member1_flow_test
+22/37 Test #22: member1_flow_test ..................   Passed    0.34 sec
+      Start 23: stage1_supplement_check
+23/37 Test #23: stage1_supplement_check ............   Passed    0.51 sec
+      Start 24: server_launch_config_test
+24/37 Test #24: server_launch_config_test ..........   Passed    1.20 sec
+      Start 25: navigation_smoke_test
+25/37 Test #25: navigation_smoke_test ..............   Passed    0.80 sec
+      Start 26: navigation_provider_test
+26/37 Test #26: navigation_provider_test ...........   Passed    0.02 sec
+      Start 27: shared_ui_test
+27/37 Test #27: shared_ui_test .....................   Passed    0.13 sec
+      Start 28: admin_smoke_test
+28/37 Test #28: admin_smoke_test ...................   Passed    0.19 sec
+      Start 29: mock_data_provider_test
+29/37 Test #29: mock_data_provider_test ............   Passed    0.01 sec
+      Start 30: user_login_test
+30/37 Test #30: user_login_test ....................   Passed    0.21 sec
+      Start 31: service_client_test
+31/37 Test #31: service_client_test ................   Passed    0.50 sec
+      Start 32: remote_user_login_provider_test
+32/37 Test #32: remote_user_login_provider_test ....   Passed    0.18 sec
+      Start 33: user_runtime_config_test
+33/37 Test #33: user_runtime_config_test ...........   Passed    0.01 sec
+      Start 34: station_query_test
+34/37 Test #34: station_query_test .................   Passed    0.25 sec
+      Start 35: user_order_provider_test
+35/37 Test #35: user_order_provider_test ...........   Passed    0.60 sec
+      Start 36: user_query_provider_test
+36/37 Test #36: user_query_provider_test ...........   Passed    0.04 sec
+      Start 37: remote_admin_provider_test
+37/37 Test #37: remote_admin_provider_test .........   Passed    0.26 sec
+
+100% tests passed, 0 tests failed out of 37
+
+Total Test time (real) =  19.77 sec

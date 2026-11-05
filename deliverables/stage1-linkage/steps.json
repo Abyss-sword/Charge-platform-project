@@ -1,0 +1,179 @@
+[
+  {
+    "step": "A0",
+    "action": "双端登录",
+    "timeUtc": "2026-09-14T08:11:03+00:00",
+    "adminSnapshotVersion": 741,
+    "userSnapshotVersion": 741
+  },
+  {
+    "step": "A1",
+    "action": "基线：用户站点详情 + WEB 桩分布",
+    "timeUtc": "2026-09-14T08:11:03+00:00",
+    "pile101Status": "IDLE",
+    "webPileStatus": [
+      {
+        "status": "IDLE",
+        "count": 12
+      },
+      {
+        "status": "RESERVED",
+        "count": 0
+      },
+      {
+        "status": "CHARGING",
+        "count": 0
+      },
+      {
+        "status": "FAULT",
+        "count": 0
+      },
+      {
+        "status": "OFFLINE",
+        "count": 0
+      }
+    ],
+    "webSnapshotVersion": 741
+  },
+  {
+    "step": "A2",
+    "action": "运营改桩FAULT（写操作）",
+    "timeUtc": "2026-09-14T08:11:03+00:00",
+    "operationId": "OP-378bb21c-0eb7-48d5-8975-5068b8fe5b01",
+    "changeVersion": 742,
+    "serverTimeUtc": "2026-09-14T08:11:03Z",
+    "dbBefore": [
+      {
+        "status": "IDLE"
+      }
+    ],
+    "dbAfter": [
+      {
+        "status": "FAULT"
+      }
+    ]
+  },
+  {
+    "step": "A3",
+    "action": "车主端 + WEB 复查",
+    "timeUtc": "2026-09-14T08:11:03+00:00",
+    "userPile101Status": "FAULT",
+    "userSnapshotVersion": 742,
+    "webPileStatus": [
+      {
+        "status": "IDLE",
+        "count": 11
+      },
+      {
+        "status": "RESERVED",
+        "count": 0
+      },
+      {
+        "status": "CHARGING",
+        "count": 0
+      },
+      {
+        "status": "FAULT",
+        "count": 1
+      },
+      {
+        "status": "OFFLINE",
+        "count": 0
+      }
+    ],
+    "webSnapshotVersion": 742
+  },
+  {
+    "step": "A4",
+    "action": "恢复IDLE并复查",
+    "timeUtc": "2026-09-14T08:11:03+00:00",
+    "changeVersion": 743,
+    "userPile101Status": "IDLE"
+  },
+  {
+    "step": "B1",
+    "action": "充值并记录基线",
+    "timeUtc": "2026-09-14T08:11:03+00:00",
+    "operationId": "OP-1604dfe3-bb9e-425c-8dff-cedc93a0bb31",
+    "changeVersion": 744,
+    "balanceAfter": {
+      "balance_yuan": "200.00"
+    },
+    "todayRevenueBefore": "0.00"
+  },
+  {
+    "step": "B4",
+    "action": "遥测→停止",
+    "timeUtc": "2026-09-14T08:11:03+00:00",
+    "orderId": "ORD-87dbfcfd-8ae2-4d07-9e3d-729e4499c879",
+    "telemetryOperationId": "OP-8e0f0455-a6c6-488e-8892-5f5c153a428e",
+    "orderEnergyKwh": "0.50",
+    "stopAmountYuan": "0.60"
+  },
+  {
+    "step": "B6",
+    "action": "支付 + 重复支付（同一 requestId）",
+    "timeUtc": "2026-09-14T08:11:03+00:00",
+    "pay1Ok": true,
+    "pay1OperationId": "OP-5277a4f2-9d86-46d7-a298-70c3f18b7000",
+    "pay2Ok": true,
+    "pay2Code": "OK",
+    "balanceBefore": {
+      "balance_yuan": "200.00"
+    },
+    "balanceAfter": {
+      "balance_yuan": "199.40"
+    },
+    "walletPayRows": [
+      {
+        "n": 1,
+        "transaction_type": "PAYMENT"
+      }
+    ],
+    "orderState": [
+      {
+        "status": "FINISHED",
+        "amount_yuan": "0.60"
+      }
+    ]
+  },
+  {
+    "step": "B7",
+    "action": "运营营收汇总 + WEB 指标复查",
+    "timeUtc": "2026-09-14T08:11:03+00:00",
+    "summaryTotalRevenue": "0.60",
+    "summaryOrderCount": 1,
+    "summaryAvgPrice": "1.20",
+    "webRevenueTrendTail": {
+      "period": "09-14",
+      "revenueYuan": "0.60"
+    },
+    "webSnapshotVersion": 750
+  },
+  {
+    "step": "C3",
+    "action": "告警→工单闭环",
+    "timeUtc": "2026-09-14T08:11:03+00:00",
+    "alarmId": 4,
+    "ticketId": 4,
+    "ticketStatusAfter": [
+      {
+        "status": "CLOSED"
+      }
+    ],
+    "changeVersions": {
+      "ack": 752,
+      "start": 753,
+      "resolve": 754,
+      "close": 756
+    },
+    "webAlarmTop": {
+      "id": "ALARM-4",
+      "type": "OVERHEAT",
+      "severity": "严重",
+      "status": "CLOSED",
+      "message": "PILE-DEMO-03 充电桩温度达到高温阈值（CLOSED）",
+      "time": "2026-09-14 16:11"
+    }
+  }
+]

@@ -1,0 +1,3 @@
+source_record_id,source_station_id,interval_start_utc,interval_end_utc,energy,energy_unit,amount,amount_unit,observation_kind,source_timezone,session_started,pile_id,capacity_piles
+d-001,station-a,2026-09-03T09:00:00Z,2026-09-03T11:00:00Z,10.27,kwh,20.54,yuan,SESSION_ALLOCATED,UTC,1,pile-a1,10
+r-001,station-b,2026-09-03T09:00:00Z,2026-09-03T10:00:00Z,4.00,kwh,10.275,yuan,METER_INTERVAL,UTC,1,pile-b1,8

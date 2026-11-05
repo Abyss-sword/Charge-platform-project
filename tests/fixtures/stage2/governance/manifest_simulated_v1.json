@@ -1,0 +1,24 @@
+{
+  "dataset_name": "stage2-simulated-intervals",
+  "provider": "第29组教学模拟数据",
+  "source_url": "runtime://simulated/stage2-intervals/2026-09-13",
+  "allowed_uses": ["teaching-analysis"],
+  "prohibited_uses": ["redistribution", "production-decision"],
+  "acquired_at": "2026-09-13T00:00:00Z",
+  "data_mode": "SIMULATED",
+  "dataset_version": "fixture-v1",
+  "coverage_start": "2026-09-01T00:00:00Z",
+  "coverage_end": "2026-09-06T00:00:00Z",
+  "redistribution_allowed": false,
+  "retention_policy": "course-only, delete after term",
+  "privacy_boundary": "no personal data; synthetic charging sessions only",
+  "ingest_batch": "batch-fixture-001",
+  "contract": "historical_interval_v1",
+  "source_id": "sim",
+  "sampling_frequency": "hourly sessions",
+  "fields": [
+    "source_record_id", "source_station_id", "interval_start_utc", "interval_end_utc",
+    "energy_kwh", "amount_yuan", "observation_kind", "source_timezone",
+    "session_started", "pile_id", "capacity_piles"
+  ]
+}

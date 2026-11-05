@@ -1,0 +1,20 @@
+{
+  "contractVersion": "forecast_v1",
+  "originTime": "2026-09-13T00:00:00Z",
+  "targetStart": "2026-09-13T01:00:00Z",
+  "targetEnd": "2026-09-14T01:00:00Z",
+  "horizonHours": 24,
+  "analysisStationId": "acn:caltech-1",
+  "businessStationId": null,
+  "dataMode": "PUBLIC_AGGREGATED",
+  "datasetVersion": "fixture-v1",
+  "modelMode": "TRAINED",
+  "status": "EXPIRED",
+  "degraded": true,
+  "reasons": [
+    "ARTIFACT_EXPIRED: 发布产物生成于 2026-09-10T00:00:00Z，超过 72 小时新鲜度上限，仅允许读旧产物并标注"
+  ],
+  "points": [],
+  "sourceMode": "FIXTURE",
+  "generatedAt": "2026-09-13T00:00:30Z"
+}

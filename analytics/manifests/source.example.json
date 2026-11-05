@@ -1,0 +1,17 @@
+{
+  "dataset_name": "member3-simulated-charge-events",
+  "provider": "第29组成员3固定种子生成器",
+  "source_url": "local://analytics/src/demo_pipeline.py",
+  "allowed_uses": ["teaching-analysis", "testing", "demonstration"],
+  "prohibited_uses": ["claiming-real-operations", "personal-profiling"],
+  "acquired_at": "2026-09-05T09:00:00+08:00",
+  "data_mode": "SIMULATED",
+  "dataset_version": "sim-v2",
+  "coverage_start": "2026-08-30T00:00:00+08:00",
+  "coverage_end": "2026-09-02T23:59:59+08:00",
+  "redistribution_allowed": true,
+  "retention_policy": "课程验收结束后可删除；不含个人信息",
+  "privacy_boundary": "禁止手机号、姓名、支付账号、车辆标识和连续轨迹标识",
+  "ingest_batch": "sim-20260905-001",
+  "fields": ["source_record_id", "source_station_id", "event_time", "timezone", "energy", "energy_unit", "duration", "duration_unit", "amount", "amount_unit", "event_status"]
+}

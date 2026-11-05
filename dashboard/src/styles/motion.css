@@ -1,0 +1,32 @@
+/* 卡片从下方 10px 淡入。 */
+@keyframes rise { from { opacity:0; transform:translateY(10px) } to { opacity:1; transform:none } }
+/* 顶栏圆点呼吸闪烁。 */
+@keyframes pulse { 50% { opacity:.45; transform:scale(.86) } }
+/* 骨架底纹左右扫过。 */
+@keyframes shimmer { to { background-position:-120% 0 } }
+/* KPI 入场，延迟吃卡片上的 --delay。 */
+.rise { animation:rise 300ms ease-out both; animation-delay:var(--delay,0ms); }
+/* 连接圆点循环脉冲。 */
+.mode-tag i,.status-chip i { animation:pulse 2s ease-in-out infinite; }
+/* 加载骨架扫光。 */
+.skeleton-card { animation:shimmer 1.2s linear infinite; }
+/* 按钮颜色和位移过渡。 */
+button { transition:background-color 180ms,color 180ms,border-color 180ms,transform 180ms; }
+/* 按下轻微缩小，给点击反馈。 */
+button:active { transform:scale(.98); }
+/* 系统要求减少动效时，动画和过渡全部关掉。 */
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* 测试可打 data-test-motion=off，同样关掉动效，保证截图稳定。 */
+[data-test-motion="off"] *, [data-test-motion="off"] *::before, [data-test-motion="off"] *::after { animation:none!important;transition:none!important; }
+[data-motion="off"] *, [data-motion="off"] *::before, [data-motion="off"] *::after { animation:none!important;transition:none!important;scroll-behavior:auto!important; }
+[data-motion="off"] .datav-heading animate,
+[data-motion="off"] .datav-frame animate,
+[data-motion="off"] .datav-frame animateMotion { display:none; }
+/*
+【文件讲解·答辩用】
+功能作用：统一入场、脉冲、骨架扫光和按钮过渡；并在无障碍或测试场景关闭动效。
+技术原理：动画写在独立文件，避免和 tokens 的布局耦合。prefers-reduced-motion 用 !important 覆盖组件内动画。LoadChart 里 ECharts 的 animationDuration 也读同一媒体查询。
+代码思路：三个 @keyframes 对应三类动作；.rise 给 KPI；脉冲给状态圆点；shimmer 给骨架。测试钩子避免 CI 截图时动画未结束。
+与其他文件关系：main.ts 在 tokens.css 之后引入。MetricStrip 使用 .rise。骨架 class 在 App.vue 加载态。不控制业务数据。
+答辩时可以怎么讲：动效只负责视觉反馈，不代表数据已经刷新。若老师系统开了减少动效，大屏会静止，这是特性不是故障。
+*/

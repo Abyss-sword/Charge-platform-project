@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "forecast_v1.schema.json",
+  "title": "forecast_v1",
+  "description": "分析 API 预测响应契约（00 总规格 §7）。Qt/Web/API 三端共用；业务字段一律两位字符串，缺值用 null 并给原因。错误三分类映射：PARAM_INVALID=参数错误，NO_DATA/EXPIRED=数据不足，MODEL_UNAVAILABLE/DEPENDENCY_UNAVAILABLE=依赖不可用。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contractVersion",
+    "originTime",
+    "targetStart",
+    "targetEnd",
+    "horizonHours",
+    "analysisStationId",
+    "businessStationId",
+    "dataMode",
+    "datasetVersion",
+    "modelMode",
+    "status",
+    "degraded",
+    "reasons",
+    "points",
+    "sourceMode",
+    "generatedAt"
+  ],
+  "properties": {
+    "contractVersion": { "const": "forecast_v1" },
+    "originTime": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "description": "预测原点 T（UTC）：全部特征只能使用 T 之前已知数据。"
+    },
+    "targetStart": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "description": "请求区间开始（含）；逐小时请求为 T+1h 对齐整点。"
+    },
+    "targetEnd": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "description": "请求区间结束（不含），如 T+24h。"
+    },
+    "horizonHours": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 24,
+      "description": "重点验收期限 1/6/24；其余小时支撑连续曲线。"
+    },
+    "analysisStationId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*:[A-Za-z0-9_.\\-]+$",
+      "description": "历史分析站点（带命名空间），如 acn:caltech-1。"
+    },
+    "businessStationId": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "description": "业务站点号；仅当人工确认与 analysisStationId 为同一站点时才非空，否则为 null。"
+    },
+    "dataMode": {
+      "type": "string",
+      "enum": ["SIMULATED", "REAL_ANONYMIZED", "PUBLIC_AGGREGATED"]
+    },
+    "datasetVersion": {
+      "type": "string",
+      "minLength": 1,
+      "description": "训练/发布产物对应的数据版本；缺失或被删除时响应必须被拒。"
+    },
+    "modelMode": {
+      "type": "string",
+      "enum": ["TRAINED", "BASELINE", "UNAVAILABLE"],
+      "description": "TRAINED=发布模型；BASELINE=验证集选中的基线；UNAVAILABLE=两者都不可用。"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["OK", "NO_DATA", "EXPIRED", "MODEL_UNAVAILABLE", "DEPENDENCY_UNAVAILABLE", "PARAM_INVALID"],
+      "description": "OK=有产物；NO_DATA=数据不足；EXPIRED=产物过期；MODEL_UNAVAILABLE=模型不可读/加载失败；DEPENDENCY_UNAVAILABLE=批处理/存储不可用；PARAM_INVALID=参数错误。"
+    },
+    "degraded": {
+      "type": "boolean",
+      "description": "true=降级运行（如 Hadoop 停机读旧产物），必须同时给 reasons。"
+    },
+    "reasons": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "状态说明与降级原因，禁止空字符串占位。"
+    },
+    "points": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/point" },
+      "description": "逐小时预测点；非 OK 状态通常为空数组。"
+    },
+    "sourceMode": {
+      "type": "string",
+      "enum": ["LIVE_ARTIFACT", "FIXTURE"],
+      "description": "LIVE_ARTIFACT=来自已发布产物；FIXTURE=测试夹具（界面/接口联调用，禁止冒充正式预测）。"
+    },
+    "generatedAt": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "description": "响应生成时间（UTC），过期判断依据之一。"
+    }
+  },
+  "$defs": {
+    "point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetStart",
+        "targetEnd",
+        "horizonHours",
+        "energyKwh",
+        "meanPowerKw",
+        "freePilesExpected",
+        "nullReason"
+      ],
+      "properties": {
+        "targetStart": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+        },
+        "targetEnd": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+        },
+        "horizonHours": { "type": "integer", "minimum": 1, "maximum": 24 },
+        "energyKwh": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9]+\\.[0-9]{2}$",
+          "description": "该小时电量 kWh 两位字符串。"
+        },
+        "meanPowerKw": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9]+\\.[0-9]{2}$",
+          "description": "该小时平均功率 kW 两位字符串；不得把累计电量标成功率。"
+        },
+        "freePilesExpected": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "目标小时末端期望可用桩数；容量未知时为 null 加原因，不给假数。"
+        },
+        "nullReason": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "NO_MODEL_ARTIFACT",
+            "NO_HOURLY_DATA",
+            "NO_CAPACITY_DATA",
+            "ARTIFACT_EXPIRED",
+            "DATA_INSUFFICIENT"
+          ],
+          "description": "缺值原因；有值时为 null。"
+        }
+      }
+    }
+  }
+}

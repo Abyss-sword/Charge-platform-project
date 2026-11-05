@@ -1,0 +1,31 @@
+{
+  "name": "charge-platform-dashboard",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=23"
+  },
+  "scripts": {
+    "dev": "vite --configLoader runner --host 127.0.0.1 --port 4173",
+    "preview": "vite preview --configLoader runner --host 127.0.0.1 --port 4173",
+    "build": "vue-tsc --noEmit && vite build --configLoader runner",
+    "test": "vitest --configLoader runner",
+    "test:run": "vitest --configLoader runner --run"
+  },
+  "dependencies": {
+    "@kjgl77/datav-vue3": "^1.7.4",
+    "echarts": "^6.0.0",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "@vue/test-utils": "^2.4.6",
+    "jsdom": "^26.0.0",
+    "typescript": "^5.8.0",
+    "vite": "^7.0.0",
+    "vitest": "^3.2.0",
+    "vue-tsc": "^3.0.0"
+  }
+}

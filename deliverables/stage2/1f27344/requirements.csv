@@ -1,0 +1,13 @@
+requirement_id,title,owner,test_ids,status,evidence_path,notes
+S2-01,保留第一阶段全业务,成员1/成员2,S2-T01,NOT_RUN,,业务回归由ctest+e2e在成员1侧复核；界面操作属成员2
+S2-02,保留运营闭环,成员1/成员2,S2-T02,NOT_RUN,,同上；权限与状态保护在服务端测试覆盖
+S2-03,真实数据治理,成员1,S2-T03;S2-T04;S2-T05;S2-T06,PASS(夹具链路),deliverables/stage2/<commit>/data-quality/,真实来源许可未确认：真实数据项保持BLOCKED；隐私阻断/拒绝记账/幂等/Decimal守恒已按夹具验收
+S2-04,Hadoop真实参与,成员1,S2-T07;S2-T23,PASS(夹具数据),deliverables/stage2/<commit>/hadoop-jobs/,HourlyJob YARN两作业SUCCEEDED；输入输出均在HDFS；真实历史数据待数据源解锁
+S2-05,Hive真实查询,成员3,S2-T08,BLOCKED,,Hive未安装（无锁定包）；成员3 T05范围
+S2-06,Spark真实处理,成员3,S2-T09,BLOCKED,,Spark未安装（无锁定包）；成员3 T05范围
+S2-07,1/6/24小时负荷预测,成员3,S2-T10;S2-T11;S2-T15,NOT_RUN,,成员3 T06范围；成员1已交付hourly产物与forecast_v1契约/夹具
+S2-08,1/6/24小时空闲桩预测,成员3,S2-T11;S2-T12,NOT_RUN,,成员3 T06范围；容量标签缺失时的null+原因分支已在契约与夹具定义
+S2-09,未来高峰时段及负荷预警,成员3,S2-T13,NOT_RUN,,成员3 T06范围
+S2-10,车主推荐,成员3/成员2,S2-T14,NOT_RUN,,成员3 T06+成员2 T07范围；business-snapshot.sh已交付只读业务快照
+S2-11,Qt/Web联动,成员2,S2-T16;S2-T17;S2-T22,NOT_RUN,,成员2 T07范围；夹具六状态已就绪可供三端联调
+S2-12,运维与交付,成员1,S2-T18;S2-T19;S2-T20;S2-T21;S2-T23;S2-T24,PASS(成员1侧),deliverables/stage2/<commit>/test-results/,启停幂等/init防护/隔离/600s压测/Hadoop重启持久化已实测；三端界面部分属成员2

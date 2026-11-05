@@ -1,0 +1,298 @@
+/* 全局设计令牌与大屏布局：默认白昼，html[data-theme=night] 切黑夜。 */
+:root {
+  /* 中文优先字体，避免投影机缺字体时乱码。 */
+  font-family: "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
+  /* 正文色与页面底走变量，方便黑夜整体换色。 */
+  color: var(--text); background: var(--page); font-synthesis: none;
+  /* 主色：海军、蓝、绿、青。 */
+  --navy: #102f46; --blue: #3478c5; --green: #24ad7a; --cyan: #32b9c8;
+  /* 辅色：lime、琥珀、红、紫。 */
+  --lime: #82c75b; --amber: #eda14b; --red: #df6b65; --purple: #756fc5;
+  /* 表面色：页底、卡片、正文、弱文案、描边。 */
+  --page: #f3f7f9; --card: #fff; --text: #183044; --muted: #6b7b88; --border: #dce6ec;
+  /* 标题墨色与实心底（按钮、名次圆），黑夜里两者会分开。 */
+  --ink: #102f46; --accent-fill: #102f46;
+  /* 顶栏/命令条、分区底、浅底、分隔线、页边光斑。 */
+  --surface: rgba(255,255,255,.94); --zone: #eef4f7; --soft: #f3f7f9; --line: #edf2f5; --glow: #e5f7f4;
+  /* 成功/警告/告警芯片。 */
+  --good-fg: #087956; --good-bg: #eef9f5; --good-bd: rgba(36,173,122,.35);
+  --warn-fg: #9b5d09; --warn-bg: #fff8e8; --warn-bd: rgba(237,161,75,.5);
+  --alert-fg: #ae423d; --alert-bg: #fff4ed; --alert-bd: #f1cbc8;
+  /* KPI 图标底。 */
+  --tone-green-bg: #eef9f5; --tone-blue-bg: #eff6fc; --tone-purple-bg: #f3f1fb; --tone-cyan-bg: #ecf9fa; --tone-red-bg: #fff4ed;
+  /* 卡片轻阴影，避免深色大屏那种霓虹。 */
+  --shadow: 0 8px 28px rgba(16,47,70,.07);
+} /* 结束 :root 白昼令牌。 */
+/* 黑夜：整页暗底，卡片略亮一档，状态色降低饱和以免投影发糊。 */
+html[data-theme="night"] {
+  --navy: #d7e6f2; --blue: #5aa0e0; --green: #3dcc96; --cyan: #4cc9d4;
+  --lime: #8ed36a; --amber: #e8b56a; --red: #e88984; --purple: #9b94e0;
+  --page: #101820; --card: #18222c; --text: #e6eef4; --muted: #8b9caa; --border: #2c3b48;
+  --ink: #e6eef4; --accent-fill: #2f6f9a;
+  --surface: rgba(24,34,44,.94); --zone: #151e27; --soft: #1c2a35; --line: #243340; --glow: #16342f;
+  --good-fg: #7ee0b4; --good-bg: #16352c; --good-bd: rgba(61,204,150,.35);
+  --warn-fg: #f0c27a; --warn-bg: #3a2c14; --warn-bd: rgba(232,181,106,.45);
+  --alert-fg: #f0a39d; --alert-bg: #3a2220; --alert-bd: #6a3a36;
+  --tone-green-bg: #16352c; --tone-blue-bg: #173044; --tone-purple-bg: #2a2744; --tone-cyan-bg: #16383c; --tone-red-bg: #3a2220;
+  --shadow: 0 8px 28px rgba(0,0,0,.32);
+} /* 结束黑夜令牌。 */
+/* 所有盒子按 border-box 计算宽高。 */
+* { box-sizing: border-box; }
+/* 去掉默认边距，铺满视口，右上角淡青光斑。 */
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; min-height: 100vh; color: var(--text); background: radial-gradient(circle at 85% -5%, var(--glow) 0, transparent 28%), var(--page); }
+/* 按钮继承页面字体。 */
+button { font: inherit; }
+/* 根壳内边距，给投影留边。 */
+.dashboard-shell { width: 100%; min-height: 100vh; padding: 14px 18px 20px; color: var(--text); }
+/* 顶栏：白底圆角，左右品牌与元数据。 */
+.topbar { min-height: 64px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); display: flex; align-items: center; justify-content: space-between; gap: 16px; box-shadow: var(--shadow); }
+/* 品牌横向排列。 */
+.brand { display: flex; align-items: center; gap: 12px; white-space: nowrap; }
+/* E 标渐变方块。 */
+.brand-mark { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; color: white; font-size: 24px; font-weight: 800; background: linear-gradient(135deg, var(--navy), var(--blue), var(--green)); }
+/* 清掉品牌和面板标题默认外边距。 */
+.brand p, .brand h1, .panel h2, .panel p { margin: 0; }
+/* 品牌英文眉题。 */
+.brand p { font-size: 10px; letter-spacing: .17em; color: var(--green); font-weight: 800; }
+/* 品牌中文主标题。 */
+.brand h1 { font-size: 21px; margin-top: 2px; color: var(--ink); }
+/* 顶栏右侧元数据行。 */
+.source-meta { display: flex; align-items: center; gap: 14px; min-width: 0; }
+/* 每块元数据最小宽度，避免挤成一团。 */
+.source-meta > div { min-width: 72px; }
+/* 标签和值各占一行。 */
+.source-meta small, .source-meta strong { display: block; }
+/* 元数据小标题灰色。 */
+.source-meta small { color: var(--muted); font-size: 10px; margin-bottom: 4px; }
+/* 元数据值不换行。 */
+.source-meta strong { font-size: 11px; white-space: nowrap; }
+/* 模式胶囊与状态芯片的共用外形。 */
+.mode-tag, .status-chip { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--good-bd); color: var(--good-fg); background: var(--good-bg); border-radius: 999px; padding: 7px 10px; font-size: 11px; font-weight: 800; }
+/* 胶囊里的状态圆点。 */
+.mode-tag i, .status-chip i { display: block; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+/* 陈旧数据改琥珀色。 */
+.mode-tag.stale { color: var(--warn-fg); background: var(--warn-bg); border-color: var(--warn-bd); }
+/* 白昼/黑夜分段开关。 */
+.theme-switch { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; background: var(--soft); }
+.theme-switch button { border: 0; background: transparent; color: var(--muted); padding: 6px 10px; font-size: 11px; font-weight: 800; cursor: pointer; }
+.theme-switch button.active { background: var(--accent-fill); color: #fff; }
+/* 粘性命令条：功能跳转 + 画面预览，滚页时仍能点。 */
+.command-bar { position: sticky; top: 8px; z-index: 8; display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 10px 0 8px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); }
+/* 功能目录，折行也不挡预览按钮。 */
+.section-nav { display: flex; flex-wrap: wrap; gap: 4px; min-width: 0; }
+/* 跳转键默认浅底，当前块海军底。 */
+.section-nav button { border: 1px solid transparent; color: var(--ink); background: var(--soft); border-radius: 8px; padding: 5px 9px; cursor: pointer; font-size: 12px; font-weight: 700; }
+.section-nav button:hover { border-color: var(--blue); color: var(--blue); }
+.section-nav button.active { color: #fff; background: var(--accent-fill); }
+/* 顶部 UI 预览按钮条，可横向滚动。 */
+.state-switcher { display: flex; flex-shrink: 0; gap: 5px; margin: 0; overflow-x: auto; }
+/* 预览按钮默认白底灰字，比功能键更弱。 */
+.state-switcher button { border: 1px solid var(--border); color: var(--muted); background: var(--card); border-radius: 8px; padding: 5px 9px; cursor: pointer; font-size: 11px; }
+/* 当前预览态高亮蓝底。 */
+.state-switcher button.active { color: #fff; border-color: var(--blue); background: var(--blue); }
+/* 点跳转后，分区和细项都不要被粘性条挡住。 */
+#overview,#insight,#device,#ops,#scenario,#trend,#ranking,#alarms,#telemetry,#status,#tickets,#recommend,#quality { scroll-margin-top: 62px; }
+/* 四条业务带：浅底托住白卡片，避免栏目往下裸堆。 */
+.zone { margin-top: 14px; padding: 14px 14px 12px; border: 1px solid var(--border); border-radius: 16px; background: var(--zone); }
+.zone-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.zone-kicker { margin: 0; color: var(--green); font-size: 10px; font-weight: 800; letter-spacing: .14em; }
+.zone-head h3 { margin: 3px 0 0; font-size: 16px; color: var(--ink); }
+.zone-desc { margin: 0 0 2px; color: var(--muted); font-size: 11px; max-width: 46%; text-align: right; line-height: 1.5; }
+.zone-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.zone-links button { border: 1px solid var(--border); background: var(--card); color: var(--muted); border-radius: 999px; padding: 4px 10px; cursor: pointer; font-size: 11px; font-weight: 700; }
+.zone-links button:hover { color: var(--blue); border-color: var(--blue); }
+.zone-links button.active { color: #fff; background: var(--accent-fill); border-color: var(--accent-fill); }
+.zone .metric-grid { margin: 0; }
+.zone .scenario-panel { margin: 0 0 10px; }
+/* 非正常态横幅。 */
+.page-state { display: flex; align-items: center; gap: 12px; border: 1px solid var(--warn-bd); background: var(--warn-bg); padding: 9px 13px; border-radius: 10px; margin-bottom: 10px; font-size: 12px; }
+/* 横幅主标题琥珀色。 */
+.page-state strong { color: var(--warn-fg); }
+/* 横幅说明灰色。 */
+.page-state span { color: var(--muted); }
+/* KPI 尽量一行排开，6 张或 8 张都自动铺满。 */
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: 8px; margin: 8px 0 10px; }
+/* KPI 卡片：顶边色条 + 阴影，高度压矮给首屏腾位置。 */
+.metric-card { min-width: 0; height: 68px; position: relative; padding: 8px 10px; border: 1px solid var(--border); border-top: 3px solid var(--green); border-radius: 12px; background: var(--card); box-shadow: var(--shadow); overflow: hidden; }
+/* 数值区给左侧图标让位。 */
+.metric-card > div:nth-child(2) { margin-left: 36px; }
+/* KPI 名称。 */
+.metric-card p { color: var(--muted); font-size: 11px; margin: 0 0 2px; }
+/* KPI 数字用等宽变体，投影好对齐。 */
+.metric-card strong { font-size: clamp(16px,1.5vw,22px); letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+/* KPI 单位。 */
+.metric-card span { margin-left: 4px; color: var(--muted); font-size: 10px; }
+/* KPI 左上角图标块。 */
+.metric-icon { position: absolute; top: 16px; left: 10px; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 8px; background: var(--tone-green-bg); color: var(--green); font-weight: 900; font-size: 12px; }
+/* 蓝色调 KPI。 */
+.tone-blue { border-top-color: var(--blue); }.tone-blue .metric-icon { background:var(--tone-blue-bg);color:var(--blue); }
+/* 紫色调 KPI。 */
+.tone-purple { border-top-color: var(--purple); }.tone-purple .metric-icon { background:var(--tone-purple-bg);color:var(--purple); }
+/* 青色调 KPI。 */
+.tone-cyan { border-top-color: var(--cyan); }.tone-cyan .metric-icon { background:var(--tone-cyan-bg);color:var(--cyan); }
+/* 红色调 KPI。 */
+.tone-red { border-top-color: var(--red); }.tone-red .metric-icon { background:var(--tone-red-bg);color:var(--red); }
+/* 内容栅格基础。 */
+.content-grid { display: grid; gap: 12px; }
+/* 主区三列：图、排行、告警。 */
+.primary-grid { grid-template-columns: minmax(0,1.65fr) minmax(230px,.8fr) minmax(255px,.9fr); }
+/* 设备带：遥测为主，状态分布靠右。 */
+.device-grid { grid-template-columns: minmax(0,1.75fr) minmax(250px,.8fr); }
+.device-grid .telemetry-panel { margin: 0; }
+/* 运维带：工单、推荐、质量并排，对应“处置 / 分流 / 可信”。 */
+.action-grid { grid-template-columns: 1.05fr 1fr 1fr; }
+/* 兼容旧类名，防止残留引用。 */
+.ops-grid,.analysis-grid,.secondary-grid { grid-template-columns: 1fr 1fr; margin-top: 12px; }
+/* 通用白卡片。 */
+.panel { min-width: 0; padding: 15px; border: 1px solid var(--border); border-radius: 12px; background: var(--card); box-shadow: var(--shadow); }
+/* 主区、次区最小高度，避免刷新时跳动。 */
+.primary-grid .panel { min-height: 260px; }.device-grid .panel,.action-grid .panel,.ops-grid .panel,.analysis-grid .panel,.secondary-grid .panel { min-height: 230px; }
+/* 面板标题行两端对齐。 */
+.panel header { display:flex; align-items:start; justify-content:space-between; gap:10px; margin-bottom:12px; }
+/* 面板英文眉题。 */
+.eyebrow { color: var(--green); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+/* 面板中文标题。 */
+.panel h2 { font-size: 16px; margin-top: 3px; color: var(--ink); }
+/* 默认芯片改成中性灰，覆盖前面的绿色胶囊。 */
+.status-chip { border-color: var(--border); background:var(--soft); color:var(--muted); padding:5px 8px; font-size:10px; }
+/* 告警芯片红、成功芯片绿。 */
+.status-chip.alert { color:var(--alert-fg);background:var(--alert-bg);border-color:var(--alert-bd); }.status-chip.good { color:var(--good-fg);background:var(--good-bg);border-color:var(--good-bd); }
+/* ECharts 画布高度。 */
+.chart { width: 100%; height: 200px; }
+/* 图下样本/MAE 说明。 */
+.chart-note { display:block; margin-top:-10px; color:var(--muted); font-size:9px; }
+/* 排行、告警、推荐去掉列表点。 */
+.ranking, .alarms, .recommendation-panel ul { list-style:none; margin:0; padding:0; }
+/* 排行一行三列：名次、信息、百分比。 */
+.ranking li { display:grid; grid-template-columns:28px 1fr 38px; gap:9px; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); }
+/* 最后一行去底边；名次方块。 */
+.ranking li:last-child { border:0; }.rank { width:25px;height:25px;border-radius:8px;display:grid;place-items:center;background:var(--tone-blue-bg);color:var(--blue);font-weight:800;font-size:11px; }
+/* 排行文字层级。 */
+.ranking strong,.ranking small { display:block; }.ranking strong { font-size:12px; }.ranking small { color:var(--muted);font-size:9px;margin:3px 0 6px; }.ranking b { font-size:12px;color:var(--green); }
+/* 利用率细条。 */
+.bar { height:4px;border-radius:8px;background:var(--line);overflow:hidden; }.bar i { display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--green),var(--cyan)); }
+/* 告警行、圆点颜色、严重/警告着色。 */
+.alarms li { display:grid;grid-template-columns:28px 1fr;gap:9px;padding:10px 0;border-bottom:1px solid var(--line); }.alarms li:last-child{border:0}.alarm-dot{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:var(--tone-blue-bg);color:var(--blue);font-weight:800}.alarms .严重 .alarm-dot{background:var(--alert-bg);color:var(--red)}.alarms .警告 .alarm-dot{background:var(--warn-bg);color:var(--warn-fg)}.alarms strong,.alarms small{display:block}.alarms strong{font-size:11px;line-height:1.45}.alarms small{font-size:9px;color:var(--muted);margin-top:3px}
+/* 推荐列表与名次圆点。 */
+.recommendation-panel li { display:grid;grid-template-columns:27px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--line); }.recommendation-panel li>span{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--accent-fill);color:white;font-size:10px;font-weight:800}.recommendation-panel strong,.recommendation-panel small{display:block}.recommendation-panel strong{font-size:12px}.recommendation-panel small{color:var(--muted);font-size:9px;margin:3px 0}.recommendation-panel li p{color:var(--good-fg);font-size:10px}
+/* 质量环绝对定位在右侧，用圆锥渐变画有效率。 */
+.quality-panel { position:relative; padding-right:108px; }.quality-ring { position:absolute;right:17px;top:69px;width:88px;height:88px;border-radius:50%;display:grid;place-content:center;text-align:center;background:conic-gradient(var(--green) var(--rate),var(--line) 0); }.quality-ring::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--card)}.quality-ring strong,.quality-ring span{position:relative}.quality-ring strong{font-size:20px}.quality-ring span{font-size:9px;color:var(--muted)}.quality-panel dl{margin:0}.quality-panel dl div,.explanation-panel dl div{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:7px 0;font-size:10px}.quality-panel dt,.explanation-panel dt{color:var(--muted)}.quality-panel dd,.explanation-panel dd{margin:0;font-weight:800}.quality-panel>p{font-size:9px;color:var(--muted);margin:9px 0 0;line-height:1.45}
+/* 说明面板、空态、页脚。 */
+.explanation-panel>p{color:var(--muted);font-size:11px;line-height:1.7}.explanation-panel dl{margin:10px 0 0}.empty-panel{min-height:360px;display:grid;place-content:center;text-align:center;background:var(--card);border:1px dashed var(--border);border-radius:12px}.empty-panel strong{font-size:20px}.empty-panel p{color:var(--muted);font-size:12px}footer{text-align:center;color:var(--muted);font-size:9px;padding:17px 0 0}
+/* 顶栏详情折叠：版本、覆盖、业务时间、区域。 */
+.source-more{position:relative}.source-more summary{list-style:none;cursor:pointer;color:var(--muted);font-size:11px;font-weight:800;padding:6px 8px;border:1px solid var(--border);border-radius:8px;background:var(--soft)}.source-more summary::-webkit-details-marker{display:none}.source-more[open] summary{color:var(--ink);border-color:var(--blue)}.source-more dl{position:absolute;right:0;top:calc(100% + 6px);z-index:9;min-width:220px;margin:0;padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:var(--card);box-shadow:var(--shadow)}.source-more dl div{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px solid var(--line);font-size:11px}.source-more dl div:last-child{border:0}.source-more dt{color:var(--muted)}.source-more dd{margin:0;font-weight:800}
+/* 加载骨架闪光底。 */
+.skeleton-card{display:block;height:68px;border:1px solid var(--border);border-radius:12px;background:linear-gradient(100deg,var(--line) 30%,var(--soft) 45%,var(--line) 60%);background-size:220% 100%}.skeleton-card.tall{height:260px}.skeleton-row{margin-top:8px}
+/* 质量分项芯片。 */
+.quality-checks{display:flex;flex-wrap:wrap;gap:4px;margin-top:9px}.quality-checks span{font-size:8px;color:var(--muted);background:var(--soft);border-radius:5px;padding:3px 5px}
+/* 状态分布与工单列表。 */
+.status-list,.tickets{list-style:none;margin:0;padding:0}.status-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.status-list li{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:9px;background:var(--soft);border-left:4px solid var(--green);font-size:11px}.status-list strong{font-size:20px}.status-list .charging{border-color:var(--blue)}.status-list .fault{border-color:var(--red)}.status-list .offline{border-color:var(--muted)}.status-list .reserved{border-color:var(--amber)}
+/* 工单行左右分布与空态。 */
+.tickets li{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}.tickets li:last-child{border:0}.tickets li>div:last-child{text-align:right}.tickets strong,.tickets small{display:block}.tickets strong{font-size:10px}.tickets b{font-size:10px;color:var(--blue)}.tickets small{font-size:8px;color:var(--muted);margin-top:3px}.panel-empty{color:var(--muted);font-size:11px;padding:20px 0;text-align:center}
+/* 中等宽度：KPI 改四列，主区改两列。 */
+@media(max-width:1280px){.metric-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.command-bar{flex-wrap:wrap}.state-switcher{width:100%}}
+@media(max-width:1100px){.dashboard-shell{padding:12px}.primary-grid{grid-template-columns:1.5fr .8fr}.alarm-panel{grid-column:1/-1}.device-grid{grid-template-columns:1fr}.action-grid{grid-template-columns:1fr 1fr}.action-grid .quality-panel{grid-column:1/-1}.ops-grid,.analysis-grid,.secondary-grid{grid-template-columns:1fr 1fr}.explanation-panel{grid-column:1/-1}.metric-card{padding:8px 9px}.metric-icon{display:none}.metric-card>div:nth-child(2){margin-left:0}.zone-desc{max-width:none}}
+/* 窄屏：顶栏换列，栅格全单列。 */
+@media(max-width:760px){.topbar{align-items:flex-start;flex-direction:column}.source-meta{width:100%;overflow-x:auto}.metric-grid,.primary-grid,.device-grid,.action-grid,.ops-grid,.analysis-grid,.secondary-grid{grid-template-columns:1fr}.metric-card{height:auto}.alarm-panel,.explanation-panel,.action-grid .quality-panel{grid-column:auto}.section-nav button{font-size:11px}.zone-head{flex-direction:column;align-items:flex-start}.zone-desc{text-align:left}}
+/* 遥测表横向承载全部物理量，小屏幕保留横向滚动而不压缩数值。 */
+.telemetry-panel{margin:0 0 12px;min-height:0}
+/* 表外包一层滚动。 */
+.telemetry-table-wrap{width:100%;overflow-x:auto}
+/* 默认精简列，展开后才拉到全宽。 */
+.telemetry-table{width:100%;min-width:720px;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.telemetry-table.expanded{min-width:1050px}
+.telemetry-table:not(.expanded) th:nth-child(4),.telemetry-table:not(.expanded) td:nth-child(4),.telemetry-table:not(.expanded) th:nth-child(5),.telemetry-table:not(.expanded) td:nth-child(5),.telemetry-table:not(.expanded) th:nth-child(9),.telemetry-table:not(.expanded) td:nth-child(9){display:none}
+/* 表头弱文案。 */
+.telemetry-table th{padding:7px 10px;text-align:left;color:var(--muted);font-size:9px;font-weight:700;border-bottom:1px solid var(--border);white-space:nowrap}
+/* 表体单元格。 */
+.telemetry-table td{padding:10px;border-bottom:1px solid var(--line);font-size:11px;white-space:nowrap}
+/* 末行去底边。 */
+.telemetry-table tbody tr:last-child td{border-bottom:0}
+/* 第一列和上报时间列内的主辅文换行。 */
+.telemetry-table td:first-child strong,.telemetry-table td:first-child small,.telemetry-table td:nth-child(8) strong,.telemetry-table td:nth-child(8) small{display:block}
+/* 辅文灰色。 */
+.telemetry-table td:first-child small,.telemetry-table td:nth-child(8) small{margin-top:3px;color:var(--muted);font-size:8px}
+/* 物理量加粗。 */
+.telemetry-table td>b{font-size:13px;color:var(--ink)}
+/* 单位小字。 */
+.telemetry-table td>small{color:var(--muted);font-size:9px}
+/* 状态胶囊与来源徽章默认绿色。 */
+.telemetry-status,.source-badge{display:inline-flex;border-radius:999px;padding:4px 7px;background:var(--good-bg);color:var(--good-fg);font-size:9px;font-weight:800}
+/* 充电中蓝色。 */
+.telemetry-status.charging{background:var(--tone-blue-bg);color:var(--blue)}
+/* 故障红色。 */
+.telemetry-status.fault{background:var(--alert-bg);color:var(--red)}
+/* 离线灰色。 */
+.telemetry-status.offline{background:var(--soft);color:var(--muted)}
+/* 预约琥珀色。 */
+.telemetry-status.reserved{background:var(--warn-bg);color:var(--warn-fg)}
+/* 来源徽章紫色。 */
+.source-badge{background:var(--tone-purple-bg);color:var(--purple)}
+/* 场景入口面板，高度随内容，不套主区 min-height。 */
+.scenario-panel{margin:0 0 10px;min-height:0;padding:10px 14px}
+.scenario-panel header{margin-bottom:8px;align-items:center}
+.scenario-meta,.telemetry-meta{display:flex;align-items:center;gap:10px;min-width:0}
+/* 场景说明与状态行。 */
+.scenario-note,.scenario-status{margin:0;color:var(--muted);font-size:11px;line-height:1.4}
+/* 状态行改深色加粗，和标题同一行。 */
+.scenario-status{color:var(--ink);font-weight:700;max-width:42vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.link-button{border:0;background:transparent;color:var(--blue);cursor:pointer;font-size:11px;font-weight:700;padding:0}
+/* 场景按钮自动折行。 */
+.scenario-grid{display:flex;flex-wrap:wrap;gap:6px}
+/* 场景按钮默认白底。 */
+.scenario-grid button{border:1px solid var(--border);background:var(--card);color:var(--ink);border-radius:8px;padding:5px 9px;cursor:pointer;font-size:11px;font-weight:700}
+/* 悬停描边变蓝。 */
+.scenario-grid button:hover{border-color:var(--blue);color:var(--blue)}
+/* 当前场景蓝底。 */
+.scenario-grid button.active{background:var(--blue);border-color:var(--blue);color:#fff}
+/* 执行中降低透明度并改光标。 */
+.scenario-grid button:disabled{cursor:wait;opacity:.65}
+/* 演示轮播海军底，和普通场景区分。 */
+.scenario-grid button.cycle{background:var(--accent-fill);border-color:var(--accent-fill);color:#fff}
+/*
+【文件讲解·答辩用】
+功能作用：整张大屏的视觉系统：色板、顶栏、KPI、栅格、遥测表、场景按钮、质量环和响应式断点。
+技术原理：CSS 变量集中在 :root，黑夜用 html[data-theme=night] 覆盖同一套变量。组件只写 class。告警用中文类名 .严重/.警告，与模板 :class="item.severity" 对齐。
+代码思路：先令牌后布局；主次栅格分开；遥测和场景写在后部，避免被通用 .panel min-height 拉得过高。1100/760 两档断点保证笔记本也能看。
+与其他文件关系：main.ts 全局引入。App.vue 和所有面板只依赖这里的 class。动效在 motion.css。不在 CSS 里写死业务数字。
+答辩时可以怎么讲：白昼是浅色运营风；点顶栏「黑夜」整页换暗底，数字和接口不变。图表颜色从同一套 CSS 变量读。
+*/
+/* Stage2 formal dashboard foundation. No rule below contains business values. */
+.stage2-dashboard{max-width:1920px;margin:0 auto;overflow-x:hidden}
+.stage2-topbar{margin-bottom:8px}
+.dashboard-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.motion-toggle{border:1px solid var(--border);border-radius:9px;background:#fff;color:var(--navy);padding:8px 12px;cursor:pointer;font-weight:700}
+.datav-heading{width:min(420px,55vw);height:24px;margin:0 auto 8px}
+.formal-state{display:flex;align-items:center;gap:12px;padding:11px 14px;margin-bottom:12px;border:1px solid #efd29d;border-radius:11px;background:#fff8e8}
+.formal-state strong{color:#8b570d}.formal-state span{color:var(--muted);font-size:12px}
+.source-ledger{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:14px}
+.source-ledger>div,.quality-placeholders article{min-width:0;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff}
+.source-ledger small,.source-ledger strong,.quality-placeholders small,.quality-placeholders strong{display:block}
+.source-ledger small,.quality-placeholders small{color:var(--muted);font-size:10px;margin-bottom:5px}
+.source-ledger strong,.quality-placeholders strong{font-size:12px;overflow-wrap:anywhere}
+.datav-frame{min-height:520px;padding:4px}
+.datav-frame-content{padding:18px}
+.dashboard-region{margin-bottom:16px;padding:16px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.96)}
+.dashboard-region:last-child{margin-bottom:0}
+.region-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:10px}
+.region-header h2{margin:3px 0 0;font-size:18px}.region-source{color:var(--muted);font-size:11px;text-align:right}
+.section-note{margin:0 0 12px;color:var(--muted);font-size:12px;line-height:1.6}
+.chart-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.chart-grid.two-columns{grid-template-columns:repeat(2,minmax(0,1fr))}
+.analysis-chart{min-height:238px}.analysis-chart header h2{margin:3px 0 0}
+.chart-placeholder{height:138px;display:grid;place-items:center;border:1px dashed var(--border);border-radius:10px;background:linear-gradient(135deg,#f7fafb,#eef7f5);color:var(--muted);font-size:12px}
+.chart-source{display:block;margin-top:10px;color:var(--muted);font-size:9px;overflow-wrap:anywhere}
+.quality-placeholders{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.forecast-data-panel,.hive-reports,.recommendation-data{display:grid;gap:8px;margin-top:12px}
+.data-meta{color:var(--muted);font-size:11px}.forecast-row{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(130px,.5fr);gap:12px;align-items:center;padding:9px 11px;border:1px solid var(--border);border-radius:9px;background:#fbfdfd;font-size:11px}.forecast-row strong{font-size:13px}.forecast-row small,.hive-reports span,.recommendation-data span,.recommendation-data small{color:var(--muted);font-size:10px}.hive-reports{grid-template-columns:repeat(3,minmax(0,1fr))}.hive-reports article{display:grid;gap:4px;padding:10px;border:1px solid var(--border);border-radius:9px}.hive-reports strong{font-size:15px}.recommendation-data{padding:10px;border:1px solid var(--border);border-radius:10px}.recommendation-data>div{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px solid var(--line)}.recommendation-data>div:last-of-type{border-bottom:0}.recommendation-data em{color:#8b570d;font-size:10px;font-style:normal}
+@media(max-width:1366px){.dashboard-shell{padding:12px}.source-ledger{grid-template-columns:repeat(3,minmax(0,1fr))}.datav-frame-content{padding:13px}.analysis-chart{min-height:220px}.chart-placeholder{height:120px}}
+@media(max-width:900px){.stage2-topbar,.region-header{flex-direction:column}.dashboard-actions{justify-content:flex-start}.source-ledger,.quality-placeholders{grid-template-columns:repeat(2,minmax(0,1fr))}.chart-grid,.chart-grid.two-columns{grid-template-columns:1fr}.region-source{text-align:left}}
+@media(max-width:600px){.source-ledger,.quality-placeholders,.hive-reports{grid-template-columns:1fr}.forecast-row{grid-template-columns:1fr;gap:4px}}
+/*
+【文件讲解·答辩用】
+功能作用：整张大屏的视觉系统：色板、顶栏、KPI、栅格、遥测表、场景按钮、质量环和响应式断点。
+技术原理：CSS 变量集中在 :root，组件只写 class。浅色是刻意选择，配合 index.html 的 color-scheme=light。告警用中文类名 .严重/.警告，与模板 :class="item.severity" 对齐。
+代码思路：先令牌后布局；主次栅格分开；遥测和场景写在后部，避免被通用 .panel min-height 拉得过高。1100/760 两档断点保证笔记本也能看。
+与其他文件关系：main.ts 全局引入。App.vue 和所有面板只依赖这里的 class。动效在 motion.css。不在 CSS 里写死业务数字。
+答辩时可以怎么讲：这是“浅色运营大屏而不是赛博暗色”。指 KPI 顶边色条和遥测等宽数字。场景按钮和顶部预览按钮长得不一样：预览在 .state-switcher，场景在 .scenario-grid。
+*/

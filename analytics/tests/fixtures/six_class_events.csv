@@ -1,0 +1,7 @@
+source_record_id,source_station_id,event_time,timezone,energy,energy_unit,duration,duration_unit,amount,amount_unit,event_status
+PUB-OK-1,PUB-STATION-A,2026-01-07T10:00:00+08:00,Asia/Shanghai,5.00,kwh,30,minutes,6.00,yuan,COMPLETED
+PUB-OK-2,PUB-STATION-B,2026-01-07T11:00:00+08:00,Asia/Shanghai,4.50,kwh,40,minutes,5.40,yuan,COMPLETED
+PUB-OK-1,PUB-STATION-A,2026-01-07T10:00:00+08:00,Asia/Shanghai,5.00,kwh,30,minutes,6.00,yuan,COMPLETED
+PUB-MISS-1,PUB-STATION-A,,Asia/Shanghai,3.00,kwh,20,minutes,3.60,yuan,COMPLETED
+PUB-UNMAP-1,PUB-UNKNOWN,2026-01-07T12:00:00+08:00,Asia/Shanghai,2.00,kwh,15,minutes,2.40,yuan,COMPLETED
+PUB-UNIT-1,PUB-STATION-A,2026-01-07T13:00:00+08:00,Asia/Shanghai,8000,joule,25,minutes,1.20,yuan,COMPLETED

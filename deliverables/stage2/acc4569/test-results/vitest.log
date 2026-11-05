@@ -1,0 +1,14 @@
+
+> charge-platform-dashboard@1.0.0 test:run
+> vitest --configLoader runner --run
+
+
+ RUN  v3.2.7 /home/bit/projects/stage2_acceptance/dashboard
+
+ ✓ tests/dashboard.test.ts (13 tests) 85ms
+
+ Test Files  1 passed (1)
+      Tests  13 passed (13)
+   Start at  19:31:43
+   Duration  1.02s (transform 298ms, setup 0ms, collect 600ms, tests 85ms, environment 216ms, prepare 31ms)
+

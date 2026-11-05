@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 充电平台第二阶段：小时聚合 MapReduce 作业（T04，成员1）。
+     hadoop-client 与集群同版本 3.2.1 且作用域 provided，不把另一套 Hadoop 运行库打包进 jar。 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.group29.charge</groupId>
+  <artifactId>charge-hourly</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+  <name>charge-hourly</name>
+  <description>站点×UTC小时电量聚合业务作业：输入 staging TSV，输出 hourly TSV（BigDecimal 累加）</description>
+
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <hadoop.version>3.2.1</hadoop.version>
+  </properties>
+
+  <dependencies>
+    <!-- 与虚拟机集群版本一致；provided：运行时由 YARN 容器类路径提供。 -->
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-client</artifactId>
+      <version>${hadoop.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- 单元测试：纯 Java 断言，不依赖集群。 -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>charge-hourly</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>org.group29.charge.HourlyJob</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

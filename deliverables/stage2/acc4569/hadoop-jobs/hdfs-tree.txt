@@ -1,0 +1,19 @@
+# HDFS 目录树（acc4569）
+
+采集日期：2026-09-14。命令：`hdfs dfs -ls -R`（全部为命令原文输出）。
+
+## 输入：/charge_platform/staging/course-v1/course-001
+
+```text
+$ hdfs dfs -ls -R /charge_platform/staging/course-v1/course-001
+-rw-r--r--   1 bit supergroup          0 2026-09-14 20:11 /charge_platform/staging/course-v1/course-001/_SUCCESS
+-rw-r--r--   1 bit supergroup     602404 2026-09-14 20:11 /charge_platform/staging/course-v1/course-001/hourly_fragments.tsv
+```
+
+## 输出：/charge_platform/hourly/course-v1/course-001
+
+```text
+$ hdfs dfs -ls -R /charge_platform/hourly/course-v1/course-001
+-rw-r--r--   1 bit supergroup          0 2026-09-14 20:14 /charge_platform/hourly/course-v1/course-001/_SUCCESS
+-rw-r--r--   1 bit supergroup     602404 2026-09-14 20:14 /charge_platform/hourly/course-v1/course-001/part-r-00000
+```

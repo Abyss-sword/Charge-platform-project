@@ -1,0 +1,1 @@
+{"items":[{"stationId":1,"name":"天河示范站","address":"示范路1号","latitude":23.1351,"longitude":113.3245,"priceYuanPerKwh":"1.23","totalPiles":4,"availablePiles":3,"distanceKm":0.6},{"stationId":2,"name":"城市公园站","address":"公园路2号","latitude":23.1298,"longitude":113.3172,"priceYuanPerKwh":"1.10","totalPiles":4,"availablePiles":2,"distanceKm":1.2}]}

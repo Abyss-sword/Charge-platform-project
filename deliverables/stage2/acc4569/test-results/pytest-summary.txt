@@ -1,0 +1,25 @@
+# Pytest 结果（acc4569）
+
+## Python 3.12 venv（本轮结论）
+
+来源：VM `/home/bit/projects/stage2_acceptance/analytics`，解释器 `analytics/.venv312/bin/python`（Python 3.12.13）。命令：
+
+```bash
+cd /home/bit/projects/stage2_acceptance/analytics
+.venv312/bin/python -m pytest -p no:warnings
+```
+
+输出（已复制为 `pytest-py312.log`）：
+
+```text
+.................................................................        [100%]
+65 passed in 4.52s
+EXIT=0
+```
+
+结论：**65 个用例通过，0 失败**。与 `--collect-only` 统计一致（14 个测试文件合计 65 项）。
+
+采集说明（如实标注来源）：
+- VM 现有 `/tmp/s2-pytest.log`（本轮已复制为 `pytest-legacy-py310.log`）实际运行于 **Python 3.10 venv**（日志引用了 `.venv/lib/python3.10/...`），且仅有 52 个进度点、无最终汇总行，属旧/不完整日志，不能作为 3.12 结论来源。
+- 因此本轮在 3.12 venv 上实际执行了一次 pytest 以取得上述 65 passed 结论（非编造；原始 stdout 存于 `pytest-py312.log`）。
+- 仓库参考目录 `deliverables/stage2/1f27344/test-results/pytest-summary.txt` 记录为 `49 passed, 2 warnings in 7.21s`，为更早基线（Python 3.10 / 49 项），与本轮 3.12 的 65 项不同，仅作历史对照。

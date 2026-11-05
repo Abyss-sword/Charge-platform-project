@@ -1,0 +1,23 @@
+{
+  "contract": "historical_interval_v1",
+  "counts": {
+    "accepted": 1812,
+    "hours": 6700,
+    "rejected": 0
+  },
+  "createdAt": "2026-09-14T12:04:14Z",
+  "dataMode": "REAL_ANONYMIZED",
+  "dataset_version": "course-v1",
+  "fingerprint": "1cf7def0985c1727d1dbcd392bd9dd0f48468372687e7e5d93af3a89a58df589",
+  "ingestBatch": "course-batch-001",
+  "publishedAt": "2026-09-14T12:04:14Z",
+  "qualityGate": {
+    "minValidRate": "0.95",
+    "ok": true,
+    "reasons": []
+  },
+  "runId": "course-001",
+  "sourceId": "course",
+  "stagingContract": "station_hour_v1",
+  "status": "PUBLISHED"
+}

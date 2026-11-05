@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "historical_interval_v1.schema.json",
+  "title": "historical_interval_v1",
+  "description": "历史分析区间记录（第二阶段数据契约）。与 charge_event_v2 并存：本契约允许金额/容量未知（null 并说明原因），不强迫真实数据补假值。时间一律 UTC 存储。energy_kwh 保留来源精度（最多6位小数），禁止逐片段提前舍入；两位 HALF_UP 只发生在发布层。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_id",
+    "dataset_version",
+    "record_id",
+    "analysis_station_id",
+    "interval_start_utc",
+    "interval_end_utc",
+    "energy_kwh",
+    "observation_kind",
+    "data_mode",
+    "source_timezone"
+  ],
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "来源命名空间标识，如 acn（Caltech ACN）或 sim（教学模拟）。"
+    },
+    "dataset_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "数据版本；不同版本是替代快照，不得相加。"
+    },
+    "record_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "来源内稳定记录主键；去重键=（source_id, record_id）。"
+    },
+    "analysis_station_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*:[A-Za-z0-9_.\\-]+$",
+      "description": "带命名空间的站点标识，如 acn:caltech-1；不得凭编号映射到本地业务站点。"
+    },
+    "interval_start_utc": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "description": "区间开始，UTC，必须以 Z 结尾。"
+    },
+    "interval_end_utc": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "description": "区间结束，UTC；必须晚于开始。"
+    },
+    "energy_kwh": {
+      "type": "string",
+      "pattern": "^[0-9]+(\\.[0-9]{1,6})?$",
+      "description": "区间电量 kWh，十进制文本，保留来源精度（不提前舍入、禁科学计数法、禁负数）。"
+    },
+    "observation_kind": {
+      "type": "string",
+      "enum": ["METER_INTERVAL", "SESSION_ALLOCATED", "PUBLIC_HOURLY"],
+      "description": "METER_INTERVAL=实测区间；SESSION_ALLOCATED=会话分摊估计（图表与评估必须注明估计）；PUBLIC_HOURLY=公开小时聚合。"
+    },
+    "data_mode": {
+      "type": "string",
+      "enum": ["SIMULATED", "REAL_ANONYMIZED", "PUBLIC_AGGREGATED"],
+      "description": "与既有契约一致的三种数据模式，禁止混聚。"
+    },
+    "source_timezone": {
+      "type": "string",
+      "minLength": 1,
+      "description": "来源声明的 IANA 时区（仅用于展示换算，存储一律 UTC）。"
+    },
+    "pile_id": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "description": "可空：来源桩标识；未知时为 null 并在 null_reasons 说明。"
+    },
+    "amount_yuan": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]+\\.[0-9]{2}$",
+      "description": "可空：金额元，两位字符串；未知时为 null 并说明原因，不得补 0。"
+    },
+    "available_piles": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "可空：区间末端可用桩数（仅实测状态可给值）。"
+    },
+    "capacity_piles": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "description": "可空：站点有效容量；未知时为 null，空闲桩预测不得给假数。"
+    },
+    "occupied_piles": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "可空：占用桩数；仅在有完整容量与停用信息时才可推导，否则为 null。"
+    },
+    "temperature_c": {
+      "type": ["number", "null"],
+      "description": "可空：气温；只能来自有来源的历史/预报值，缺失为 null。"
+    },
+    "weather_source": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "description": "可空：气温数据来源说明。"
+    },
+    "null_reasons": {
+      "type": "object",
+      "additionalProperties": false,
+      "propertyNames": {
+        "enum": ["pile_id", "amount_yuan", "available_piles", "capacity_piles", "occupied_piles", "temperature_c", "weather_source"]
+      },
+      "additionalProperties": {
+        "type": "string",
+        "enum": ["NOT_COLLECTED", "NOT_APPLICABLE", "ANOMALY"]
+      },
+      "description": "可空字段为 null 时必须给出原因：未采集/不适用/异常。"
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "amount_yuan": { "type": "null" } }, "required": ["amount_yuan"] },
+      "then": { "properties": { "null_reasons": { "required": ["amount_yuan"] } }, "required": ["null_reasons"] }
+    },
+    {
+      "if": { "properties": { "capacity_piles": { "type": "null" } }, "required": ["capacity_piles"] },
+      "then": { "properties": { "null_reasons": { "required": ["capacity_piles"] } }, "required": ["null_reasons"] }
+    },
+    {
+      "if": { "properties": { "occupied_piles": { "type": "null" } }, "required": ["occupied_piles"] },
+      "then": { "properties": { "null_reasons": { "required": ["occupied_piles"] } }, "required": ["null_reasons"] }
+    },
+    {
+      "if": { "properties": { "temperature_c": { "type": "null" } }, "required": ["temperature_c"] },
+      "then": { "properties": { "null_reasons": { "required": ["temperature_c"] } }, "required": ["null_reasons"] }
+    },
+    {
+      "if": { "properties": { "pile_id": { "type": "null" } }, "required": ["pile_id"] },
+      "then": { "properties": { "null_reasons": { "required": ["pile_id"] } }, "required": ["null_reasons"] }
+    },
+    {
+      "if": { "properties": { "available_piles": { "type": "null" } }, "required": ["available_piles"] },
+      "then": { "properties": { "null_reasons": { "required": ["available_piles"] } }, "required": ["null_reasons"] }
+    },
+    {
+      "if": { "properties": { "weather_source": { "type": "null" } }, "required": ["weather_source"] },
+      "then": { "properties": { "null_reasons": { "required": ["weather_source"] } }, "required": ["null_reasons"] }
+    }
+  ]
+}

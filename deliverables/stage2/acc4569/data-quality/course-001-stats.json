@@ -1,0 +1,64 @@
+{
+  "source_id": "course",
+  "dataset_version": "course-v1",
+  "input_file": "/home/bit/data/controlled/course/source-raw.csv",
+  "input_md5": "d0d5d4f49bbde206886c586fcb6d7c75",
+  "input_count": 3340,
+  "accepted_count": 1812,
+  "rejected_count": 1,
+  "excluded_count": 1527,
+  "rejection_reasons": {
+    "ANOMALY": 1
+  },
+  "diagnostic_tags": {
+    "DURATION_GT_24H": 1
+  },
+  "station_selection": {
+    "rule": "distinct_days>=28 and records>=50; keep all qualifying stations",
+    "total_stations": 105,
+    "selected_count": 19,
+    "selected_stations": [
+      "369001",
+      "955429",
+      "474204",
+      "228137",
+      "878706",
+      "250527",
+      "944515",
+      "207262",
+      "219054",
+      "371335",
+      "987396",
+      "664306",
+      "728918",
+      "902592",
+      "280221",
+      "366832",
+      "569886",
+      "489543",
+      "638536"
+    ],
+    "excluded_station_count": 86,
+    "excluded_row_count": 1528
+  },
+  "assumptions": {
+    "year_offset": 2000,
+    "source_timezone": "Asia/Shanghai",
+    "energy_unit": "kwh",
+    "observation_kind": "SESSION_ALLOCATED",
+    "basis": "weekday 字段与真实日历一致（0014-11-18=Tue）证明年份被减 2000；其余为列名/地域推定。"
+  },
+  "coverage_start_utc": "2014-12-02T09:24:49Z",
+  "coverage_end_utc": "2015-10-04T04:44:59Z",
+  "contract_columns": [
+    "source_record_id",
+    "source_station_id",
+    "interval_start_utc",
+    "interval_end_utc",
+    "energy",
+    "energy_unit",
+    "observation_kind",
+    "source_timezone",
+    "session_started"
+  ]
+}

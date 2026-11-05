@@ -1,0 +1,38 @@
+# setuptools 构建后端：把 analytics 安装成可 import 的 Python 包。
+[build-system]  # setuptools 构建后端：把 analytics 安装成可 import 的 Python 包。
+requires = ["setuptools>=68"]  # 至少 setuptools 68，才能按现代 pyproject 声明打包。
+build-backend = "setuptools.build_meta"  # 由 setuptools 负责发现包并生成发行物。
+
+# 项目元数据：包名、版本、运行时依赖（FastAPI 只读服务 + 训练评测）。
+[project]  # 项目元数据：包名、版本、运行时依赖（FastAPI 只读服务 + 训练评测）。
+name = "charge-platform-analytics"  # pip 安装名；导入路径仍是 src 包。
+version = "1.0.0"  # 与 analytics/src/__init__.py 的 __version__ 对齐。
+description = "Traceable member-3 analytics pipeline and API"  # 一句话：可追溯流水线加 HTTP 边界。
+requires-python = ">=3.10"  # 用到 list[str]、ZoneInfo、from __future__ import annotations。
+dependencies = [  # 运行时必装：HTTP、表格、树模型、ASGI 服务器。
+  "fastapi>=0.110,<1",  # 大屏 /dashboard 与 /simulator 的 HTTP 框架。
+  "flask>=3.0,<4",  # 第二阶段正式只读分析HTTP入口；FastAPI仅保留第一阶段兼容层。
+  "pandas>=2.0,<4",  # 流水线侧表格处理预留；当前核心路径多用 csv/json。
+  "scikit-learn>=1.4,<2",  # model.py 的 HistGradientBoostingRegressor。
+  "uvicorn>=0.29,<1"  # 本地启动 FastAPI 进程。
+]  # 结束：运行时必装：HTTP、表格、树模型、ASGI 服务器。
+
+# 测试额外依赖：pytest 跑单元测试，httpx 给 FastAPI TestClient 发请求。
+[project.optional-dependencies]  # 测试额外依赖：pytest 跑单元测试，httpx 给 FastAPI TestClient 发请求。
+test = ["httpx>=0.27,<1", "jsonschema>=4.23,<5", "pytest>=8,<10"]  # jsonschema 校验第二阶段契约夹具；其余依赖支持 API 与 pytest。
+
+# pytest 默认只扫 tests 目录，安静模式减少无关输出。
+[tool.pytest.ini_options]  # pytest 默认只扫 tests 目录，安静模式减少无关输出。
+testpaths = ["tests"]  # 测试根目录是 analytics/tests，不扫 src。
+addopts = "-q"  # 默认安静输出，CI 和本地脚本都更好读。
+
+# 告诉 setuptools：可安装的 Python 包目录名叫 src。
+[tool.setuptools]  # 告诉 setuptools：可安装的 Python 包目录名叫 src。
+packages = ["src"]  # 安装后 import src.api，与仓库 analytics/src 对应。
+
+# 【文件讲解·答辩用】
+# 功能作用：声明成员3分析包如何安装、依赖什么、测试怎么跑。
+# 技术原理：PEP 517/518 用 [build-system] 指定后端；[project] 列出运行时库，避免手写 requirements 分叉。
+# 代码思路：核心依赖锁在主 dependencies；httpx/pytest 放 optional，生产启动不必装测试栈。
+# 与其他文件关系：FastAPI 入口是 src/api.py；模型训练用 scikit-learn 在 src/model.py；测试在 analytics/tests。
+# 答辩时可以怎么讲：这不是业务代码，是“怎么把分析服务装起来”；大屏只读 SQLite、场景按钮启动子进程，都不在这个文件里写 SQL。

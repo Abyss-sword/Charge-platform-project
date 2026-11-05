@@ -1,0 +1,65 @@
+# HourlyJob 驱动退出码证据（acc4569）
+
+采集日期：2026-09-14。退出码约定见 `bigdata/mapreduce/src/main/java/org/group29/charge/HourlyJob.java` 头注释：
+`0 成功；2 参数错误；3 输入不存在；4 输出已存在；1 作业失败或无效行计数 > 0`。
+
+以下三种错误路径均已实际复跑并核对退出码（本轮 acc4569 工作副本）。
+
+## 1. 缺参 → exit=2
+
+原始命令：
+
+```bash
+hadoop jar bigdata/mapreduce/target/charge-hourly.jar org.group29.charge.HourlyJob
+```
+
+输出与退出码：
+
+```text
+用法: HourlyJob --input <路径> --output <路径>
+EXIT=2
+```
+
+来源：`/tmp/mr-noargs.log`（内容一致），本轮复跑确认。
+
+## 2. 输入不存在 → exit=3
+
+原始命令：
+
+```bash
+hadoop jar bigdata/mapreduce/target/charge-hourly.jar org.group29.charge.HourlyJob \
+  --input /charge_platform/staging/course-v1/nope \
+  --output /charge_platform/hourly/course-v1/nope-out
+```
+
+输出与退出码：
+
+```text
+输入不存在: /charge_platform/staging/course-v1/nope
+EXIT=3
+```
+
+来源：`/tmp/mr-noinput.log`，本轮复跑确认。
+
+## 3. 输出已存在 → exit=4
+
+原始命令：
+
+```bash
+hadoop jar bigdata/mapreduce/target/charge-hourly.jar org.group29.charge.HourlyJob \
+  --input /charge_platform/staging/course-v1/course-001 \
+  --output /charge_platform/hourly/course-v1/course-001
+```
+
+输出与退出码：
+
+```text
+输出已存在: /charge_platform/hourly/course-v1/course-001
+EXIT=4
+```
+
+来源：`/tmp/mr-exists.log`，本轮复跑确认。
+
+## 结论
+
+三条错误路径退出码（2/3/4）与代码约定、原始日志完全一致；防护语义为“缺参必拦、不读不存在的输入、不覆盖既有输出”。

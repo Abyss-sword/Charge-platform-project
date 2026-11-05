@@ -1,0 +1,22 @@
+{
+  "active": {
+    "course-v1": {
+      "counts": {
+        "accepted": 1812,
+        "hours": 6700,
+        "rejected": 0
+      },
+      "dataMode": "REAL_ANONYMIZED",
+      "path": "runtime/analytics/runs/course-v1/course-001",
+      "publishedAt": "2026-09-14T12:04:14Z",
+      "quality": {
+        "accepted": 1812,
+        "rejected": 0,
+        "validRate": 1.0
+      },
+      "runId": "course-001",
+      "sourceId": "course"
+    }
+  },
+  "updatedAt": "2026-09-14T12:11:24Z"
+}

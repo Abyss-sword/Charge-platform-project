@@ -1,0 +1,1 @@
+<RCC><qresource prefix="/mock/admin"><file alias="login.json">mock/login.json</file><file alias="overview.json">mock/overview.json</file><file alias="devices.json">mock/devices.json</file><file alias="orders.json">mock/orders.json</file></qresource></RCC>

@@ -1,0 +1,45 @@
+{
+  "dataset": "member3-six-class-quality-fixtures",
+  "data_mode": "PUBLIC_AGGREGATED",
+  "contract": "charge_event_v2",
+  "note": "隐私列单独放在 privacy_events.csv，因为表头一旦出现 phone_number，准入会整批拒绝，不能和六类清洗夹具混在同一 CSV。",
+  "six_class_events.csv": {
+    "input_count": 6,
+    "accepted_count": 2,
+    "rejected_count": 4,
+    "valid_rate": 0.3333333333333333,
+    "rejection_reasons": {
+      "DUPLICATE": 1,
+      "INVALID_ENERGY_UNIT": 1,
+      "MISSING_REQUIRED": 1,
+      "UNMAPPED_STATION": 1
+    },
+    "duplicate_count": 1,
+    "missing_count": 1,
+    "unmapped_count": 1,
+    "unit_error_count": 1,
+    "privacy_count": 0,
+    "accepted_ids": ["PUB-OK-1", "PUB-OK-2"],
+    "normalized": {
+      "PUB-OK-1": {
+        "station_id": 1,
+        "energy_kwh": "5.00",
+        "duration_seconds": 1800,
+        "amount_yuan": "6.00",
+        "status": "FINISHED"
+      },
+      "PUB-OK-2": {
+        "station_id": 2,
+        "energy_kwh": "4.50",
+        "duration_seconds": 2400,
+        "amount_yuan": "5.40",
+        "status": "FINISHED"
+      }
+    }
+  },
+  "privacy_events.csv": {
+    "admission": "rejected",
+    "reason_contains": "privacy",
+    "usable_raw_batch": false
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "description": "station_hour_v1 发布行样例：正常小时、分摊小时与缺失小时（energyKwh=null 而非 0）。",
+  "rows": [
+    {
+      "datasetVersion": "fixture-v1",
+      "runId": "run-001",
+      "analysisStationId": "sim:station-a",
+      "hourStartUtc": "2026-09-01T09:00:00Z",
+      "energyKwh": "7.30",
+      "meanPowerKw": "7.30",
+      "sessionStartCount": 1,
+      "coverageSeconds": 3600,
+      "observationKind": "METER_INTERVAL",
+      "dataMode": "SIMULATED",
+      "availablePiles": null,
+      "capacityPiles": 10,
+      "occupiedPiles": null,
+      "nullReasons": {
+        "availablePiles": "NOT_COLLECTED",
+        "occupiedPiles": "NOT_COLLECTED"
+      }
+    },
+    {
+      "datasetVersion": "fixture-v1",
+      "runId": "run-001",
+      "analysisStationId": "sim:station-a",
+      "hourStartUtc": "2026-09-01T10:00:00Z",
+      "energyKwh": "5.14",
+      "meanPowerKw": "5.14",
+      "sessionStartCount": 0,
+      "coverageSeconds": 3600,
+      "observationKind": "SESSION_ALLOCATED",
+      "dataMode": "SIMULATED",
+      "availablePiles": null,
+      "capacityPiles": 10,
+      "occupiedPiles": null,
+      "nullReasons": {
+        "availablePiles": "NOT_COLLECTED",
+        "occupiedPiles": "NOT_COLLECTED"
+      }
+    },
+    {
+      "datasetVersion": "fixture-v1",
+      "runId": "run-001",
+      "analysisStationId": "sim:station-b",
+      "hourStartUtc": "2026-09-01T11:00:00Z",
+      "energyKwh": null,
+      "meanPowerKw": null,
+      "sessionStartCount": 0,
+      "coverageSeconds": 0,
+      "observationKind": "MISSING",
+      "dataMode": "SIMULATED",
+      "availablePiles": null,
+      "capacityPiles": 8,
+      "occupiedPiles": null,
+      "nullReasons": {
+        "energyKwh": "NOT_COLLECTED",
+        "meanPowerKw": "NOT_COLLECTED",
+        "availablePiles": "NOT_COLLECTED",
+        "occupiedPiles": "NOT_COLLECTED"
+      }
+    }
+  ]
+}

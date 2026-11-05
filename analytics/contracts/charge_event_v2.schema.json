@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "charge_event_v2.schema.json",
+  "title": "charge_event_v2",
+  "description": "Read-only, de-identified charge event export contract. Energy and amount are canonical two-decimal strings in kWh and yuan.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_record_id",
+    "source_station_id",
+    "station_id",
+    "occurred_at",
+    "ingested_at",
+    "timezone",
+    "energy_kwh",
+    "duration_seconds",
+    "amount_yuan",
+    "status",
+    "data_mode",
+    "dataset_name",
+    "dataset_version",
+    "ingest_batch"
+  ],
+  "properties": {
+    "source_record_id": { "type": "string", "minLength": 1 },
+    "source_station_id": { "type": "string", "minLength": 1 },
+    "station_id": { "type": "integer", "minimum": 1 },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "ingested_at": { "type": "string", "format": "date-time" },
+    "timezone": { "type": "string", "minLength": 1 },
+    "energy_kwh": { "type": "string", "pattern": "^[0-9]+\\.[0-9]{2}$" },
+    "duration_seconds": { "type": "integer", "minimum": 0 },
+    "amount_yuan": { "type": "string", "pattern": "^[0-9]+\\.[0-9]{2}$" },
+    "status": {
+      "type": "string",
+      "enum": ["RESERVED", "CHARGING", "PENDING_PAYMENT", "FINISHED", "CANCELED", "EXPIRED"]
+    },
+    "data_mode": {
+      "type": "string",
+      "enum": ["SIMULATED", "REAL_ANONYMIZED", "PUBLIC_AGGREGATED"]
+    },
+    "dataset_name": { "type": "string", "minLength": 1 },
+    "dataset_version": { "type": "string", "minLength": 1 },
+    "ingest_batch": { "type": "string", "minLength": 1 }
+  }
+}

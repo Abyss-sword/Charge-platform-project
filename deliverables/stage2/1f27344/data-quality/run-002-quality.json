@@ -1,0 +1,12 @@
+{
+  "accepted_count": 3,
+  "diagnostic_tags": {},
+  "input_count": 5,
+  "reconciled": true,
+  "rejected_count": 2,
+  "rejection_reasons": {
+    "DUPLICATE": 1,
+    "INVALID_TIMESTAMP": 1
+  },
+  "valid_rate": 0.6
+}

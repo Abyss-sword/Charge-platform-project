@@ -1,0 +1,2 @@
+source_record_id,source_station_id,phone_number,interval_start_utc,interval_end_utc,energy,energy_unit,amount,amount_unit,observation_kind,source_timezone,session_started,pile_id,capacity_piles
+p-001,station-a,13800000000,2026-09-05T08:00:00Z,2026-09-05T09:00:00Z,5.00,kwh,10.00,yuan,METER_INTERVAL,UTC,1,pile-a1,10

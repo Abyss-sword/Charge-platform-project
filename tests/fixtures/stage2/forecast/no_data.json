@@ -1,0 +1,20 @@
+{
+  "contractVersion": "forecast_v1",
+  "originTime": "2026-09-13T00:00:00Z",
+  "targetStart": "2026-09-13T01:00:00Z",
+  "targetEnd": "2026-09-14T01:00:00Z",
+  "horizonHours": 24,
+  "analysisStationId": "acn:caltech-1",
+  "businessStationId": null,
+  "dataMode": "PUBLIC_AGGREGATED",
+  "datasetVersion": "fixture-v1",
+  "modelMode": "UNAVAILABLE",
+  "status": "NO_DATA",
+  "degraded": true,
+  "reasons": [
+    "NO_HOURLY_DATA: fixture-v1 在 acn:caltech-1 无任何小时表数据，不制造预测值"
+  ],
+  "points": [],
+  "sourceMode": "FIXTURE",
+  "generatedAt": "2026-09-13T00:00:30Z"
+}

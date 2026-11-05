@@ -1,0 +1,26 @@
+# Spark 冒烟证据（acc4569）
+
+采集日期：2026-09-14。来源：VM `/tmp/s2-spark-smoke.log`（原始文件 38025 字节，日志时间 20:48）。
+
+## 应用与版本
+
+```text
+Submitted application: course-hourly-smoke
+INFO SparkContext: Running Spark version 3.4.1
+Using Scala version 2.12.17, Java HotSpot(TM) 64-Bit Server VM, 1.8.0_261
+YarnClientImpl: Submitted application application_1789301464634_0010
+Application report for application_1789301464634_0010 (state: RUNNING)
+tracking URL: http://bitdev:8088/proxy/application_1789301464634_0010/
+```
+
+## 结果原文（读同一 HDFS 路径 `/charge_platform/hourly/course-v1/course-001`）
+
+```text
+SPARK_ROWS= 6700
+SPARK_STATIONS= 19
+SPARK_TOTAL_KWH= 10349.589999999990
+```
+
+## 结论
+
+Spark 3.4.1（YARN client 模式，application_1789301464634_0010，Final-State SUCCEEDED）读取与 Hive 外部表相同的路径，三项指标与 Hive 冒烟完全一致，证明 Hive 与 Spark 对同一份 hourly 产物解释一致。

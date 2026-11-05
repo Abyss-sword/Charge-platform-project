@@ -1,0 +1,235 @@
+{
+  "contractVersion": "forecast_v1",
+  "originTime": "2026-09-13T00:00:00Z",
+  "targetStart": "2026-09-13T01:00:00Z",
+  "targetEnd": "2026-09-14T01:00:00Z",
+  "horizonHours": 24,
+  "analysisStationId": "acn:caltech-1",
+  "businessStationId": null,
+  "dataMode": "PUBLIC_AGGREGATED",
+  "datasetVersion": "fixture-v1",
+  "modelMode": "TRAINED",
+  "status": "OK",
+  "degraded": false,
+  "reasons": [],
+  "points": [
+    {
+      "targetStart": "2026-09-13T01:00:00Z",
+      "targetEnd": "2026-09-13T02:00:00Z",
+      "horizonHours": 1,
+      "energyKwh": "9.96",
+      "meanPowerKw": "9.96",
+      "freePilesExpected": 4,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T02:00:00Z",
+      "targetEnd": "2026-09-13T03:00:00Z",
+      "horizonHours": 2,
+      "energyKwh": "11.71",
+      "meanPowerKw": "11.71",
+      "freePilesExpected": 5,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T03:00:00Z",
+      "targetEnd": "2026-09-13T04:00:00Z",
+      "horizonHours": 3,
+      "energyKwh": "13.05",
+      "meanPowerKw": "13.05",
+      "freePilesExpected": 6,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T04:00:00Z",
+      "targetEnd": "2026-09-13T05:00:00Z",
+      "horizonHours": 4,
+      "energyKwh": "13.83",
+      "meanPowerKw": "13.83",
+      "freePilesExpected": 7,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T05:00:00Z",
+      "targetEnd": "2026-09-13T06:00:00Z",
+      "horizonHours": 5,
+      "energyKwh": "13.97",
+      "meanPowerKw": "13.97",
+      "freePilesExpected": 3,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T06:00:00Z",
+      "targetEnd": "2026-09-13T07:00:00Z",
+      "horizonHours": 6,
+      "energyKwh": "13.46",
+      "meanPowerKw": "13.46",
+      "freePilesExpected": 4,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T07:00:00Z",
+      "targetEnd": "2026-09-13T08:00:00Z",
+      "horizonHours": 7,
+      "energyKwh": "12.34",
+      "meanPowerKw": "12.34",
+      "freePilesExpected": 5,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T08:00:00Z",
+      "targetEnd": "2026-09-13T09:00:00Z",
+      "horizonHours": 8,
+      "energyKwh": "10.74",
+      "meanPowerKw": "10.74",
+      "freePilesExpected": 6,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T09:00:00Z",
+      "targetEnd": "2026-09-13T10:00:00Z",
+      "horizonHours": 9,
+      "energyKwh": "8.85",
+      "meanPowerKw": "8.85",
+      "freePilesExpected": 7,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T10:00:00Z",
+      "targetEnd": "2026-09-13T11:00:00Z",
+      "horizonHours": 10,
+      "energyKwh": "9.14",
+      "meanPowerKw": "9.14",
+      "freePilesExpected": 3,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T11:00:00Z",
+      "targetEnd": "2026-09-13T12:00:00Z",
+      "horizonHours": 11,
+      "energyKwh": "11.01",
+      "meanPowerKw": "11.01",
+      "freePilesExpected": 4,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T12:00:00Z",
+      "targetEnd": "2026-09-13T13:00:00Z",
+      "horizonHours": 12,
+      "energyKwh": "12.54",
+      "meanPowerKw": "12.54",
+      "freePilesExpected": 5,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T13:00:00Z",
+      "targetEnd": "2026-09-13T14:00:00Z",
+      "horizonHours": 13,
+      "energyKwh": "13.57",
+      "meanPowerKw": "13.57",
+      "freePilesExpected": 6,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T14:00:00Z",
+      "targetEnd": "2026-09-13T15:00:00Z",
+      "horizonHours": 14,
+      "energyKwh": "13.99",
+      "meanPowerKw": "13.99",
+      "freePilesExpected": 7,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T15:00:00Z",
+      "targetEnd": "2026-09-13T16:00:00Z",
+      "horizonHours": 15,
+      "energyKwh": "13.75",
+      "meanPowerKw": "13.75",
+      "freePilesExpected": 3,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T16:00:00Z",
+      "targetEnd": "2026-09-13T17:00:00Z",
+      "horizonHours": 16,
+      "energyKwh": "12.88",
+      "meanPowerKw": "12.88",
+      "freePilesExpected": 4,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T17:00:00Z",
+      "targetEnd": "2026-09-13T18:00:00Z",
+      "horizonHours": 17,
+      "energyKwh": "11.47",
+      "meanPowerKw": "11.47",
+      "freePilesExpected": 5,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T18:00:00Z",
+      "targetEnd": "2026-09-13T19:00:00Z",
+      "horizonHours": 18,
+      "energyKwh": "9.68",
+      "meanPowerKw": "9.68",
+      "freePilesExpected": 6,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T19:00:00Z",
+      "targetEnd": "2026-09-13T20:00:00Z",
+      "horizonHours": 19,
+      "energyKwh": "8.30",
+      "meanPowerKw": "8.30",
+      "freePilesExpected": 7,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T20:00:00Z",
+      "targetEnd": "2026-09-13T21:00:00Z",
+      "horizonHours": 20,
+      "energyKwh": "10.24",
+      "meanPowerKw": "10.24",
+      "freePilesExpected": 3,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T21:00:00Z",
+      "targetEnd": "2026-09-13T22:00:00Z",
+      "horizonHours": 21,
+      "energyKwh": "11.94",
+      "meanPowerKw": "11.94",
+      "freePilesExpected": 4,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T22:00:00Z",
+      "targetEnd": "2026-09-13T23:00:00Z",
+      "horizonHours": 22,
+      "energyKwh": "13.21",
+      "meanPowerKw": "13.21",
+      "freePilesExpected": 5,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-13T23:00:00Z",
+      "targetEnd": "2026-09-14T00:00:00Z",
+      "horizonHours": 23,
+      "energyKwh": "13.90",
+      "meanPowerKw": "13.90",
+      "freePilesExpected": 6,
+      "nullReason": null
+    },
+    {
+      "targetStart": "2026-09-14T00:00:00Z",
+      "targetEnd": "2026-09-14T01:00:00Z",
+      "horizonHours": 24,
+      "energyKwh": "13.94",
+      "meanPowerKw": "13.94",
+      "freePilesExpected": 7,
+      "nullReason": null
+    }
+  ],
+  "sourceMode": "FIXTURE",
+  "generatedAt": "2026-09-13T00:00:30Z"
+}

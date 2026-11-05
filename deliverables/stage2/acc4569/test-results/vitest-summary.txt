@@ -1,0 +1,13 @@
+# Vitest 结果（acc4569）
+
+来源：VM `/tmp/s2-vitest.log`（本轮已复制为 `vitest.log`）。命令：`npm run test:run`（dashboard，vitest v3.2.7）。
+
+```text
+ ✓ tests/dashboard.test.ts (13 tests) 85ms
+
+ Test Files  1 passed (1)
+      Tests  13 passed (13)
+   Duration  1.02s
+```
+
+结论：**13/13 通过，0 失败**。
