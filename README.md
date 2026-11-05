@@ -42,7 +42,7 @@ On Ubuntu, run `./start-member3.sh` from the repository root. The command keeps 
 
 The two pages are:
 
-- Stage-1 business dashboard: `http://127.0.0.1:4173/`
+- Stage-1 business dashboard: `http://127.0.0.1:4173/` 
 - Stage-2 analysis page: `http://127.0.0.1:4173/?stage=2`
 
 After configuring the build directory and compiling, start the C++ and Qt programs from the executables under `build/`. The database path is `runtime/charge_platform.sqlite`.
